@@ -1,4 +1,4 @@
-# Project Name
+# Lab: Running Java microservice on an Azure Kubernetes Service
 
 This lab teaches you how to deploy the [Spring Petclinic Microservices](https://github.com/Azure-Samples/spring-petclinic-microservices/tree/labstarter) application to an AKS cluster and integrate it with additional Azure services.
 
