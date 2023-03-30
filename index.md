@@ -73,5 +73,5 @@ In case you want to install tooling on your own machine, you will need:
 After finishing this lab you will have a running Spring Petclinic Microservices application which is interacting with Azure Service Bus and Azure Event Hubs. Your secrets will be safe and sound in an Azure Key Vault and all communication between services will happen through the Azure network.
 
 <span class="fs-3">
-[Let's start!]({{ site.baseurl }}/docs/01_lab_plan/01_openlab_plan_migrating_to_aks.md){: .btn .mt-7 }
+[Let's start!]({{ site.baseurl }}{% link /docs/01_lab_plan/01_openlab_plan_migrating_to_aks.md %}){: .btn .mt-7 }
 </span>
