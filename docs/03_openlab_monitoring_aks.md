@@ -1,20 +1,20 @@
 ---
-title: 'Challenge 3: Enable monitoring'
+title: 'Lab 3: Enable monitoring'
 layout: default
 nav_order: 4
 ---
 
-# Challenge 03: Enable monitoring and end-to-end tracing
+# Lab 03: Enable monitoring and end-to-end tracing
 
 # Student manual
 
-## Challenge scenario
+## Lab scenario
 
-You have created your first Azure Kubernetes Service, deployed your applications to it and exposed them through the api-gateway service. Now that everything is up and running, it would be nice to monitor the availability of your applications and to be able to see in case any errors or exceptions in your applications occur. In this challenge you will add end-to-end monitoring to your applications. 
+You have created your first Azure Kubernetes Service, deployed your applications to it and exposed them through the api-gateway service. Now that everything is up and running, it would be nice to monitor the availability of your applications and to be able to see in case any errors or exceptions in your applications occur. In this lab you will add end-to-end monitoring to your applications. 
 
 ## Objectives
 
-After you complete this challenge, you will be able to:
+After you complete this lab, you will be able to:
 
 - Inspect your AKS service in the Azure Portal
 - Configure AKS monitoring
@@ -28,7 +28,7 @@ After you complete this challenge, you will be able to:
 
 ## Instructions
 
-In this challenge, you will:
+In this lab, you will:
 
 - Inspect your AKS service in the Azure Portal
 - Configure AKS monitoring
@@ -40,7 +40,7 @@ In this challenge, you will:
 
 ### Inspect your AKS service in the Azure Portal
 
-By default the Azure Portal already gives you quite some info on the current status of the resources running in your AKS instance. In this first step of this challenge, open the Azure Portal, navigate to your AKS instance and inspect what info you can find on the kubernetes resources running in the cluster. Find information on: 
+By default the Azure Portal already gives you quite some info on the current status of the resources running in your AKS instance. In this first step of this lab, open the Azure Portal, navigate to your AKS instance and inspect what info you can find on the kubernetes resources running in the cluster. Find information on: 
 
 - The pods running in the `spring-petclinic` namespace.
 - The services and ingresses running in the `spring-petclinic` namespace.
@@ -526,7 +526,7 @@ To get the logging information flowing, you should navigate to your application 
 
 1. Select the three dots on the right of your newly created availability test and select _Open Rules (Alerts) page_.
 
-1. Select the alert rule for your availability test. By default there are no action groups associated with this alert rule. We will not configure them in this challenge, but just for your information, with action groups you can send email or SMS notifications to specific people or groups.
+1. Select the alert rule for your availability test. By default there are no action groups associated with this alert rule. We will not configure them in this lab, but just for your information, with action groups you can send email or SMS notifications to specific people or groups.
     
 > [!div class="nextstepaction"]
 > [Create and manage action groups in the Azure portal](https://docs.microsoft.com/en-us/azure/azure-monitor/alerts/action-groups) 

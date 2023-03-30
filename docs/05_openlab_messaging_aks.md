@@ -1,33 +1,33 @@
 ---
-title: 'Challenge 5: Send messages between microservices'
+title: 'Lab 5: Send messages between microservices'
 layout: default
 nav_order: 6
 ---
 
-# Challenge 05: Create and configure Azure Service Bus for sending messages between microservices
+# Lab 05: Create and configure Azure Service Bus for sending messages between microservices
 
 # Student manual
 
-## Challenge scenario
+## Lab scenario
 
 You have now set up and deployed the Spring Petclinic application. Some of the microservices however also need to send messages to a third party system over a message bus and you also want to enable the intake of telemetry events. You want to provide this functionality with native Azure services like Azure Service Bus and Azure Event Hub. In a first step you will provide the messaging behavior.
 
 ## Objectives
 
-After you complete this challenge, you will be able to:
+After you complete this lab, you will be able to:
 
 - Create an Azure Service Bus resource
 - Try out an existing microservice
 - Update an existing microservice to use the queues
 - Add the message producer
 
-## Challenge Duration
+## Lab Duration
 
 - **Estimated Time**: 60 minutes
 
 ## Instructions
 
-During this challenge, you will:
+During this lab, you will:
 
 - Create an Azure Service Bus resource
 - Try out an existing microservice

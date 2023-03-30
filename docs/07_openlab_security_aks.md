@@ -1,20 +1,20 @@
 ---
-title: 'Lab: Protect endpoints using Web Application Firewalls'
+title: 'Lab 7: Protect endpoints using Web Application Firewalls'
 layout: default
 nav_order: 8
 ---
 
-# Challenge 07: Protect endpoints using Web Application Firewall
+# Lab 07: Protect endpoints using Web Application Firewall
 
 # Student manual
 
-## Challenge scenario
+## Lab scenario
 
 By now, you have completed setting up your Spring Boot application in Azure on AKS and secured the secrets used by the microservices to connect to their data store. You are satisfied with the results, but you do recognize that there is still room for improvement. In particular, you are concerned with the public endpoints of the application which are directly accessible to anyone with access to the internet. You would like to add a Web Application Firewall to filter incoming requests to your application. In this exercise, you will step through implementing this configuration.
 
 ## Objectives
 
-After you complete this challenge, you will be able to:
+After you complete this lab, you will be able to:
 
 - Update your microservices to use an internal loadbalancer
 - Create additional networking resources
@@ -24,13 +24,13 @@ After you complete this challenge, you will be able to:
 - Expose the admin server
 - Configure WAF on Application Gateway
 
-## Challenge Duration
+## Lab Duration
 
 - **Estimated Time**: 60 minutes
 
 ## Instructions
 
-During this challenge, you will:
+During this lab, you will:
 
 - Update your microservices to use an internal loadbalancer
 - Create additional networking resources

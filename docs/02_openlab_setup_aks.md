@@ -1,20 +1,20 @@
 ---
-title: 'Challenge 2: Migrate to Azure Kubernetes Service'
+title: 'Lab 2: Migrate to Azure Kubernetes Service'
 layout: default
 nav_order: 3
 ---
 
-# Challenge 02: Migrate a Spring Apps microservices application to Azure Kubernetes Service
+# Lab 02: Migrate a Spring Apps microservices application to Azure Kubernetes Service
 
 # Student manual
 
-## Challenge scenario
+## Lab scenario
 
 You have established a plan for migrating the Spring Petclinic application to Azure Kubernetes Service. It is now time to perform the actual migration of the Spring Petclinic application components.
 
 ## Objectives
 
-After you complete this challenge, you will be able to:
+After you complete this lab, you will be able to:
 
 - Create an AKS service and Container Registry.
 - Set up a configuration repository.
@@ -23,7 +23,7 @@ After you complete this challenge, you will be able to:
 - Deploy the microservices of the Spring Petclinic app to the AKS cluster.
 - Test the application through the publicly available endpoint.
 
-## Challenge Duration
+## Lab Duration
 
 - **Estimated Time**: 120 minutes
 

@@ -1,33 +1,33 @@
 ---
-title: 'Challenge 6: Send events between microservices'
+title: 'Lab 6: Send events between microservices'
 layout: default
 nav_order: 7
 ---
 
-# Challenge 06: Create and configure Azure Event Hubs for sending events between microservices
+# Lab 06: Create and configure Azure Event Hubs for sending events between microservices
 
 # Student manual
 
-## Challenge scenario
+## Lab scenario
 
 You have now set up messaging for the Spring Petclinic application. As a next step you will set up the receiving of events from an Azure Event Hub.
 
 ## Objectives
 
-After you complete this challenge, you will be able to:
+After you complete this lab, you will be able to:
 
 - Create an Azure Event Hub resource
 - Use an existing microservice to send events to the Event Hub
 - Update an existing microservice to receive events from the Event Hub
 - Inspect telemetry data being received
 
-## Challenge Duration
+## Lab Duration
 
 - **Estimated Time**: 60 minutes
 
 ## Instructions
 
-During this challenge, you will:
+During this lab, you will:
 
 - Create an Azure Event Hub resource
 - Use an existing microservice to send events to the Event Hub
@@ -44,7 +44,7 @@ You will first need to create an Azure Event Hub namespace to send events to. Cr
 
 You should add the connection string to the `telemetry` event hub in your Key Vault so the microservices can safely retrieve this value.
 
-   > **Note**: As an alternative you can use the Managed Identity of your microservice to connect to the event hub. For this challenge however you will store the connection string in your Key Vault. You can use the following guidance to implement these changes: [Authenticate a managed identity with Azure Active Directory to access Event Hubs Resources](https://docs.microsoft.com/azure/event-hubs/authenticate-managed-identity?tabs=latest).
+   > **Note**: As an alternative you can use the Managed Identity of your microservice to connect to the event hub. For this lab however you will store the connection string in your Key Vault. You can use the following guidance to implement these changes: [Authenticate a managed identity with Azure Active Directory to access Event Hubs Resources](https://docs.microsoft.com/azure/event-hubs/authenticate-managed-identity?tabs=latest).
 
 The connection to the event hub needs to be stored in the `spring.kafka.properties.sasl.jaas.config` application property. Store its value in a Key Vault secret named `SPRING-KAFKA-PROPERTIES-SASL-JAAS-CONFIG`.
 

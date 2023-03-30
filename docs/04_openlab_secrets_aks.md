@@ -1,20 +1,20 @@
 ---
-title: 'Challenge 4: Secure secrets using Key Vault'
+title: 'Lab 4: Secure secrets using Key Vault'
 layout: default
 nav_order: 5
 ---
 
-# Challenge 04: Secure application secrets using Key Vault
+# Lab 04: Secure application secrets using Key Vault
 
 # Student manual
 
-## Challenge scenario
+## Lab scenario
 
-Your team is now running a first version of the spring-petclinic microservice application in Azure. However you don't like the fact that your application secrets live directly in configuration code. Also the GitHub config repo you have, has been reporting to you that it holds secret values. You would like to have a better way to protect application secrets like your database connection string and your GitHub PAT token. In this challenge you will better protect your application secrets.
+Your team is now running a first version of the spring-petclinic microservice application in Azure. However you don't like the fact that your application secrets live directly in configuration code. Also the GitHub config repo you have, has been reporting to you that it holds secret values. You would like to have a better way to protect application secrets like your database connection string and your GitHub PAT token. In this lab you will better protect your application secrets.
 
 ## Objectives
 
-After you complete this challenge, you will be able to:
+After you complete this lab, you will be able to:
 
 - Create an Azure Key Vault service
 - Add your connection string and GitHub PAT as a secret in Key Vault
@@ -28,7 +28,7 @@ After you complete this challenge, you will be able to:
 
 ## Instructions
 
-During this challenge, you will:
+During this lab, you will:
 
 - Create an Azure Key Vault service
 - Add your connection string and GitHub PAT as a secret in Key Vault
