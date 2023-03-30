@@ -48,9 +48,6 @@ As a first step you will remove the public access to your microservices so they 
 
 - [Use an internal load balancer with Azure Kubernetes Service (AKS)](https://learn.microsoft.com/azure/aks/internal-lb)
 
-<details>
-<summary>hint</summary>
-<br/>
 
 1. Navigate to the kubernetes directory and update the `spring-petclinic-api-gateway.yml` and `spring-petclinic-admin-server.yml` files to use an internal loadbalancer. To do this, add an annotation between the metadata name and spec elements below line 75. 
 
@@ -117,7 +114,7 @@ echo $AKS_MC_LB_INTERNAL_FE_IP1
 echo $AKS_MC_LB_INTERNAL_FE_IP2
 ```
 
-</details>
+
 
 ### Create additional networking resources
 
@@ -128,9 +125,6 @@ Since you want to place the apps in your AKS cluster behind an Azure Application
 
 In later exercises you will network integrate the backend services like the database and the Key Vault.
 
-<details>
-<summary>hint</summary>
-<br/>
 
 1. From the Git Bash prompt, run the following command to create an additional subnet in your virtual network.
 
@@ -146,7 +140,7 @@ In later exercises you will network integrate the backend services like the data
        --address-prefix $APPLICATION_GATEWAY_SUBNET_CIDR
    ```
 
-</details>
+
 
 ### Acquire a certificate and add it to Key Vault
 
@@ -156,9 +150,6 @@ To start, you need to generate a self-signed certificate and add it to Azure Key
 
 - [Acquire a self-signed certificate](https://docs.microsoft.com/azure/spring-cloud/expose-apps-gateway-end-to-end-tls?tabs=self-signed-cert%2Cself-signed-cert-2#acquire-a-certificate).
 
-<details>
-<summary>hint</summary>
-<br/>
 
 1. To create a self-signed certificate, you will use a `sample-policy.json` file. To generate the file, from the Git Bash shell prompt, run the following command:
 
@@ -212,7 +203,7 @@ To start, you need to generate a self-signed certificate and add it to Azure Key
        --policy @result-policy.json
    ```
 
-</details>
+
 
 ### Create the Application Gateway resources
 
@@ -221,9 +212,6 @@ You are now ready to create an Application Gateway instance to expose your appli
 - [Create Web Application Firewall policies for Application Gateway](https://docs.microsoft.com/azure/web-application-firewall/ag/create-waf-policy-ag).
 - [Create the Application Gateway resources](https://docs.microsoft.com/azure/spring-cloud/expose-apps-gateway-end-to-end-tls?tabs=self-signed-cert%2Cself-signed-cert-2#create-network-resources).
 
-<details>
-<summary>hint</summary>
-<br/>
 
    > **Note**: An Application Gateway resource needs a dedicated subnet to be deployed into, however, you already created this subnet at the beginning of this exercise.
 
@@ -309,7 +297,7 @@ You are now ready to create an Application Gateway instance to expose your appli
 
    > **Note**: Wait for the provisioning to complete. This might take about 5 minutes.
 
-</details>
+
 
 ### Access the application by DNS name
 
@@ -318,9 +306,6 @@ You now have completed all steps required to test whether your application is ac
 - [Check the deployment of Application Gateways](https://docs.microsoft.com/azure/spring-cloud/expose-apps-gateway-end-to-end-tls?tabs=self-signed-cert%2Cself-signed-cert-2#check-the-deployment-of-application-gateway).
 - [Configure DNS and access the application](https://docs.microsoft.com/azure/spring-cloud/expose-apps-gateway-end-to-end-tls?tabs=self-signed-cert%2Cself-signed-cert-2#configure-dns-and-access-the-application).
 
-<details>
-<summary>hint</summary>
-<br/>
 
 1. Check the back-end health of the Application Gateway instance you deployed in the previous task.
 
@@ -362,15 +347,12 @@ You now have completed all steps required to test whether your application is ac
 
    > **Note**: While the connection to the MySQL database should be working at this point, keep in mind that this connectivity is established via a its public endpoint, rather than the private one. You will remediate this in the next exercise of this lab.
 
-</details>
+
 
 ### Expose the admin server
 
 You now have public access again through the Application Gateway to the spring petclinic application. Let's create an additional rule in the Application Gateway to also expose the admin server.
 
-<details>
-<summary>hint</summary>
-<br/>
 
 1. As a first step you will need to add an additional backend address pool pointing to the private IP address of the admin server.
 
@@ -432,7 +414,7 @@ az network application-gateway show-backend-health \
     --resource-group $RESOURCE_GROUP
 ```
 
-</details>
+
 
 ### Enable the WAF policy
 
@@ -440,9 +422,6 @@ Now that you have successfully deployed Application Gateway and you can connect 
 
 - [az network application-gateway waf-policy](https://docs.microsoft.com/cli/azure/network/application-gateway/waf-policy?view=azure-cli-latest).
 
-<details>
-<summary>hint</summary>
-<br/>
 
 1. To conclude the setup, enable the WAF policy. This will automatically start flagging noncompliant requests. To avoid blocking any requests at this point, configure it in detection mode.
 
@@ -454,7 +433,7 @@ Now that you have successfully deployed Application Gateway and you can connect 
        --state Enabled
    ```
 
-</details>
+
 
 #### Review
 

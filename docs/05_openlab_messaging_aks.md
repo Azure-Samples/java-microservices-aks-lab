@@ -61,9 +61,6 @@ The connection to the Service Bus needs to be stored in the `spring.jms.serviceb
 
 This translates the secret in Key Vault to the correct application property for your microservices. This usage of properties is described in the following documentation: [Special Characters in Property Name](https://microsoft.github.io/spring-cloud-azure/current/reference/html/index.html#special-characters-in-property-name).
 
-<details>
-<summary>hint</summary>
-<br/>
 
 1. On your lab computer, in Git Bash window, from the Git Bash prompt, run the following command to create a Service Bus namespace. Note that the name of the namespace needs to be globally unique, so adjust it accordingly in case the randomly generated name is already in use. You will need to create the namespace with the **Premium** sku. This is needed to use JMS 2.0 messaging later on in the lab.
 
@@ -163,7 +160,7 @@ git commit -m 'added service bus'
 git push
 ```
 
-</details>
+
 
 ### Try out an existing microservice
 
@@ -171,9 +168,6 @@ In the spring-petclinic-microservices repository, the `spring-petclinic-messagin
 
 - [Use Service Bus Explorer to run data operations on Service Bus (Preview)](https://docs.microsoft.com/azure/service-bus-messaging/explorer).
 
-<details>
-<summary>hint</summary>
-<br/>
 
 1. From the Git Bash window, in the `spring-petclinic-microservices` repository you cloned locally, use your favorite text editor to open the `pom.xml` file in the root directory of the cloned repo. you'll have to uncomment the module for the `spring-petclinic-messaging-emulator` in the `<modules>` element at line 26.
 
@@ -442,7 +436,7 @@ kubectl get services
 
 1. Select the message entry in the queue and review the **Message Body** section to confirm that its content matches the message you submitted.
 
-</details>
+
 
 You might want to inspect the code of the `messaging-emulator` microservice. Take a look at:
 
@@ -463,9 +457,6 @@ You have now reviewed how an existing microservice interacts with the Service Bu
 
 To start, you will need to add the necessary dependencies.
 
-<details>
-<summary>hint</summary>
-<br/>
 
 1. From the Git Bash window, in the spring-petclinic-microservices repository you cloned locally, use your favorite text editor to open the `spring-petclinic-microservices/spring-petclinic-visits-service/pom.xml` file of the `visits` microservice. In the `<!-- Spring Cloud -->` section, following the last dependency element, add the following dependency element:
 
@@ -476,15 +467,12 @@ To start, you will need to add the necessary dependencies.
            </dependency>
    ```
 
-</details>
+
 
 ### Add the message producers and listeners
 
 You will next add the code required to send and receive messages to the `visits` service. The `message-emulator` will send a `PetClinicMessageRequest` to the `visits-requests` queue. The `visits` service will need to listen to this queue and each time a `VisitRequest` message is submitted, it will create a new `Visit` for the pet ID referenced in the message. The `visits` service will also send back a `VisitResponse` as a confirmation to the `visits-confirmations` queue. This is the queue the `message-emulator` is listening to.
 
-<details>
-<summary>hint</summary>
-<br/>
 
 1. In the `spring-petclinic-visits-service` directory, create a new `src/main/java/org/springframework/samples/petclinic/visits/entities` subdirectory and add a `VisitRequest.java` class file containing the following code:
 
@@ -837,7 +825,7 @@ kubectl apply -f spring-petclinic-visits-service.yml
 
 1. On the **Owner Information** page, in the **Pets and Visits** section, verify the presence of an entry representing the message you submitted earlier in this lab.
 
-</details>
+
 
 #### Review
 

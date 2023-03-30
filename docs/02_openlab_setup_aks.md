@@ -69,9 +69,6 @@ As a first step you will need to create your Azure Kubernetes Service together w
 - [Guidance on AKS and ACR creation](https://docs.microsoft.com/en-us/azure/aks/cluster-container-registry-integration?tabs=azure-cli)
 - [Use kubenet networking with your own IP address ranges in Azure Kubernetes Service (AKS)](https://learn.microsoft.com/azure/aks/configure-kubenet#create-a-virtual-network-and-subnet)
 
-<details>
-<summary>hint</summary>
-<br/>
 
 1. On your lab computer, open the Git Bash window and, from the Git Bash prompt, run the following command to sign in to your Azure subscription:
 
@@ -163,7 +160,7 @@ As a first step you will need to create your Azure Kubernetes Service together w
 
    > **Note**: You may also notice an additional resource group in your subscription, which name will start with _MC_. This resource group got created by the AKS creation process. It holds the resources of your AKS cluster. For learning purposes it might be good to check this resource group from time to time and to see what got created there.
 
-</details>
+
 
 ### Set up a configuration repository
 
@@ -175,9 +172,6 @@ As part of the setup process, you need to create a Personal Access Token (PAT) i
 
 Once you have your own config repository to work with, you will have to update the _spring-petclinic-config-server/src/main/resources/application.yml_ file of the _spring-petclinic-config-server_ application to make use of this new repo. 
 
-<details>
-<summary>hint</summary>
-<br/>
 
 1. On your lab computer, in your web browser, navigate to your GitHub account, navigate to the **Repositories** page and create a new private repository named **spring-petclinic-microservices-config**.
 
@@ -246,7 +240,7 @@ Once you have your own config repository to work with, you will have to update t
 
    > **Note**: In case you are saving your config on another branch than the main branch of he repository, you can indicate the branch in the _default-label_ setting. In case you are using the main branch, you can omit this setting.
 
-</details>
+
 
 ### Create an Azure MySQL Database service
 
@@ -258,9 +252,6 @@ You will also need to update the config for your applications to use the newly p
 
 Your MySQL database will also have a firewall enabled. This firewall will by default block all incoming calls. You will need to open this firewall in case you want to connect to it from your microservices running in the AKS cluster.
 
-<details>
-<summary>hint</summary>
-<br/>
 
 1. Run the following commands to create an instance of MySQL Flexible server. Note that the name of the server must be globally unique, so adjust it accordingly in case the randomly generated name is already in use. Keep in mind that the name can contain only lowercase letters, numbers and hyphens. In addition, replace the `<myadmin-password>` placeholder with a complex password and record its value.
 
@@ -376,7 +367,7 @@ Your MySQL database will also have a firewall enabled. This firewall will by def
    git push
    ```
 
-</details>
+
 
    > **Note**: At this point, the admin account user name and password are stored in clear text in the application.yml config file. In one of upcoming exercises, you will remediate this potential vulnerability by removing clear text credentials from your configuration.
 
@@ -407,9 +398,6 @@ ADD ${JAR_FILE} app.jar
 ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
 ```
 
-<details>
-<summary>hint</summary>
-<br/>
 
 1. In the parent **pom.xml** file double check the version number on line 9.
 
@@ -621,7 +609,7 @@ ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
    ]
    ```
 
-</details>
+
 
 ### Deploy the microservices of the Spring Petclinic app to the AKS cluster
 
@@ -715,9 +703,6 @@ spec:
   type: #service_type#
 ```
 
-<details>
-<summary>hint</summary>
-<br/>
 
 1. As a first step, make sure you can log in to the AKS cluster. The _az aks get-credentials_ command will populate your _kubeconfig_ file.
 
@@ -1090,7 +1075,7 @@ spring-petclinic-visits-service-57c56db5fb-gzsbh      1/1     Running   0       
    kubectl delete pod <name-of-the-pod> 
    ```
 
-</details>
+
 
 ### Test the application through the publicly available endpoint
 
@@ -1098,9 +1083,6 @@ Now that you have deployed each of the microservices, you will test them out to 
 
 - [Get public endpoints](https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough#test-the-application)
 
-<details>
-<summary>hint</summary>
-<br/>
 
 1. You configured both the _api-gateway_ and the _admin-server_ with a loadbalancer. Double check whether public IP's were created for them.
 
@@ -1151,4 +1133,4 @@ You now have the Spring Petclinic application running properly on the AKS cluste
 
    > **Note**: For the MySQL Flexible Server connection to work, you will need to have your local IP address added to the MySQL Flexible Server firewall.
 
-</details>
+

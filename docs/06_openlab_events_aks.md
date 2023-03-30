@@ -48,9 +48,6 @@ You should add the connection string to the `telemetry` event hub in your Key Va
 
 The connection to the event hub needs to be stored in the `spring.kafka.properties.sasl.jaas.config` application property. Store its value in a Key Vault secret named `SPRING-KAFKA-PROPERTIES-SASL-JAAS-CONFIG`.
 
-<details>
-<summary>hint</summary>
-<br/>
 
 1. On your lab computer, in the Git Bash window, from the Git Bash prompt, run the following command to create an Event Hub namespace. The name you use for your namespace should be globally unique, so adjust it accordingly in case the randomly generated name is already in use.
 
@@ -188,7 +185,7 @@ git commit -m 'added event hub'
 git push
 ```
 
-</details>
+
 
 ### Use an existing microservice to send events to the Event Hub
 
@@ -202,9 +199,6 @@ Update the `TestProducer.java` file in the `producer/src/main/java` directory, s
 
 Compile the producer app. You will use it at the end of this lab to send 100 events to your event hub. You will be able to re-run this multiple times to send events to the event hub.
 
-<details>
-<summary>hint</summary>
-<br/>
 
 1. From the Git Bash shell in the `projects` folder, clone the [azure-event-hubs-for-kafka on GitHub](https://github.com/Azure/azure-event-hubs-for-kafka) project.
 
@@ -240,7 +234,7 @@ Compile the producer app. You will use it at the end of this lab to send 100 eve
    mvn clean package
    ```
 
-</details>
+
 
 ### Update an existing microservice to receive events from the Event Hub
 
@@ -248,9 +242,6 @@ In this task, you will update the customers microservice to receive events from 
 
 - [Spring for Apache Kafka](https://docs.spring.io/spring-kafka/reference/html/).
 
-<details>
-<summary>hint</summary>
-<br/>
 
 1. In your local application repository, use your favorite text editor to open the `pom.xml` file of the `spring-petclinic-customers-service` microservice, add to it another dependency element within the `<!-- Spring Cloud -->` section of the `<dependencies>` element, and save the change:
 
@@ -516,7 +507,7 @@ cd kubernetes
 kubectl apply -f spring-petclinic-customers-service.yml
 ```
 
-</details>
+
 
 ### Inspect telemetry data being received
 
@@ -524,9 +515,6 @@ To conclude this lab, you will run the producer app to send 100 events to your e
 
 Start the producer locally and in the mean time inspect the logs of the customers service to check events coming in and being processed.
 
-<details>
-<summary>hint</summary>
-<br/>
 
 1. In the Git Bash window, set the current working directory to the `events` folder and run the `TestProducer` application.
 
@@ -548,7 +536,7 @@ kubectl logs customers-service-65d987f697-pd79d
 
   You should see output indicating that the events from the event hub were being picked up.
 
-</details>
+
 
 #### Review
 

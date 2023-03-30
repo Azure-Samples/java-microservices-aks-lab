@@ -56,9 +56,6 @@ You can follow the below guidance to do so.
 
 You will notice that a lot of the data you see here is the same info you can get by issueing `kubectl get` statements. What `kubectl` statements would you issue for getting the same info?
 
-<details>
-<summary>hint</summary>
-<br/>
 
 1. In your browser navigate to the Azure Portal, and to the resource group you deployed the AKS cluster to. Select the AKS cluster.
 
@@ -97,7 +94,7 @@ kubectl describe pod <customers-service-pod-instance> -n spring-petclinic
 kubectl logs <customers-service-pod-instance> -n spring-petclinic
 ```
 
-</details>
+
 
 ### Configure AKS monitoring
 
@@ -110,9 +107,6 @@ Enable Container Insights on your AKS cluster. You can follow the below guidance
 > [Enable Container insights for Azure Kubernetes Service (AKS) cluster](https://learn.microsoft.com/azure/azure-monitor/containers/container-insights-enable-aks?tabs=azure-cli)
 > [Create a Log Analytics workspace](https://learn.microsoft.com/en-us/azure/azure-monitor/logs/quick-create-workspace?tabs=azure-cli)
 
-<details>
-<summary>hint</summary>
-<br/>
 
 1. In your bash shell, create a Log Analytics workspace.
  
@@ -143,7 +137,7 @@ kubectl get ds ama-logs --namespace=kube-system
 
 1. To verify that monitoring data is available in your Log Analytics workspace, in your browser, navigate to your AKS cluster in the Azure Portal. Select `Insights`. You can inspect here the monitoring data in your cluster.
 
-</details>
+
 
 > **Note**: Azure Monitor managed service for Prometheus is currently in Public Preview. This is an alternative way for monitoring your kubernetes resources. You can find more info at [Collect Prometheus metrics from AKS cluster (preview)](https://learn.microsoft.com/azure/azure-monitor/essentials/prometheus-metrics-enable?tabs=azure-portal). This can then be visualized by [Azure Managed Grafana](https://learn.microsoft.com/azure/azure-monitor/essentials/prometheus-grafana).
 
@@ -163,9 +157,6 @@ You can follow the below guidance to do so.
 > [Spring Boot via Docker entry point](https://learn.microsoft.com/azure/azure-monitor/app/java-spring-boot#spring-boot-via-docker-entry-point)
 > [Workspace-based Application Insights resources](https://learn.microsoft.com/azure/azure-monitor/app/create-workspace-resource#create-a-resource-automatically)
 
-<details>
-<summary>hint</summary>
-<br/>
 
 1. As a first step, you will need to create an Application Insights resource. Execute the below statement in your bash shell.
 
@@ -474,7 +465,7 @@ kubectl get pods -w
 
 > **Note**: To make sure everything is back up and running as expected, you may want to double check if all your services are back up and running by using a `kubectl get pods -w` statement. If a pod is showing any problems in starting up, take a look at the logs to check what might be going on with a `kubectl logs <name of the pod>`.
 
-</details>
+
 
 ### Analyze application specific monitoring data
 
@@ -494,9 +485,6 @@ Use this guidance to take a look at:
 
 To get the logging information flowing, you should navigate to your application and to the different sub-pages and refresh each page a couple of times. It might take some time to update Application Insights with information from your application.
 
-<details>
-<summary>hint</summary>
-<br/>
 
 1. In your browser, navigate to the Azure Portal and your resource group.
 
@@ -548,5 +536,5 @@ To get the logging information flowing, you should navigate to your application 
 
 1.  Select _Run_, to see the results of this query.
 
-</details>
+
 

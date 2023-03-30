@@ -45,9 +45,6 @@ As a first step you will need to create a new Azure Key Vault service for holdin
 > [!div class="nextstepaction"]
 > [Create Key Vault](https://docs.microsoft.com/en-us/azure/spring-cloud/tutorial-managed-identities-key-vault#set-up-your-key-vault)
 
-<details>
-<summary>hint</summary>
-<br/>
 
 1. Create an Azure Key Vault using Azure CLI. Make sure you use a globally unique name for your Key Vault.
 
@@ -60,7 +57,7 @@ az keyvault create \
     --sku standard
 ```
 
-</details>
+
 
 ### Add your connection string and GitHub PAT as a secret in Key Vault
 
@@ -69,9 +66,6 @@ Now that your Key Vault got created, you will need to add the MySQL database con
 > [!div class="nextstepaction"]
 > [Add a secret to Key Vault](https://docs.microsoft.com/en-us/azure/spring-cloud/tutorial-managed-identities-key-vault#set-up-your-key-vault)
 
-<details>
-<summary>hint</summary>
-<br/>
 
 1. Add the database username and password as a secret to your Key Vault.
 
@@ -97,7 +91,7 @@ az keyvault secret set \
     --vault-name $KEYVAULT_NAME
 ```
 
-</details>
+
 
 ### Add Key Vault CSI driver to your cluster
 
@@ -106,9 +100,6 @@ You have now created your Key Vault and added the database connectionstring to i
 > [!div class="nextstepaction"]
 > [Upgrade an AKS cluster to use CSI driver](https://docs.microsoft.com/en-us/azure/aks/csi-secrets-store-driver#upgrade-an-existing-aks-cluster-with-azure-key-vault-provider-for-secrets-store-csi-driver-support)
 
-<details>
-<summary>hint</summary>
-<br/>
 
 1. You will need to install the CSI driver add-on on your AKS cluster.
 
@@ -122,7 +113,7 @@ az aks enable-addons --addons azure-keyvault-secrets-provider --name $AKSCLUSTER
 kubectl get pods -n kube-system
 ```
 
-</details>
+
 
 ### Create a Managed Identity and give it access to your Key Vault
 
@@ -132,9 +123,6 @@ You now have the CSI driver installed, as a next step you will need to allow acc
 
 > **Note**: Using the cluster Managed Identity for connecting to the Key Vault service should not be used when your cluster is used by multiple applications that don't share a security context. In that case connecting to the Key Vault with an identity per application security context is the more secure setup.
 
-<details>
-<summary>hint</summary>
-<br/>
 
 1. Each AKS cluster also contains resources in a managed resource group. This is also where the Virtual Machine Scale Set lives. Use the below commang to get a reference to this resource group.
 
@@ -162,7 +150,7 @@ az keyvault set-policy -g $RESOURCE_GROUP -n $KEYVAULT_NAME --secret-permissions
 az keyvault set-policy -g $RESOURCE_GROUP -n $KEYVAULT_NAME --certificate-permissions get --spn $CLIENT_ID
 ```
 
-</details>
+
 
 ### Create a secret provider class to serve secrets from Key Vault to your application
 
@@ -177,9 +165,6 @@ You now have everything in place to start using Key Vault secrets in your applic
 
 Make sure the secrets you created in Key Vault show up as environment variables called _SPRING_DATASOURCE_USERNAME_ and _SPRING_DATASOURCE_PASSWORD_ in your customers, vets and visits pods.
 
-<details>
-<summary>hint</summary>
-<br/>
 
 1. As a first step you will create a _SecretProviderClass_.
 
@@ -494,4 +479,4 @@ Here as well you should find back the _SPRING_DATASOURCE_USERNAME_ and _SPRING_D
 
 1. And lastly, you can connect to the external service IP of the admin server on port 8080 to inspect whether your applications are properly running and what environment variables are loaded.
 
-</details>
+

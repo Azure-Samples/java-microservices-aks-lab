@@ -45,9 +45,6 @@ To start, you need to lock down access to your MySQL database by redeploying it 
 - [Private Network Access for Azure Database for MySQL - Flexible Server](https://learn.microsoft.com/azure/mysql/flexible-server/concepts-networking-vnet).
 - [Create and manage virtual networks for Azure Database for MySQL Flexible Server using the Azure CLI](https://learn.microsoft.com/azure/mysql/flexible-server/how-to-manage-virtual-network-cli)
 
-<details>
-<summary>hint</summary>
-<br/>
 
 1. As a first step delete the previous MySQL Flexible server instance you had.
 
@@ -136,7 +133,7 @@ az network vnet subnet create \
 
 1. In the Azure Portal navigate to your newly created MySQL Flexible Server and select the `Networking` menu. In the menu you will notice you can no longer lock down the server firewall. The server however only allows incoming calls through the virtual network.
 
-</details>
+
 
 ### Lock down the Key Vault instance by using a private endpoint
 
@@ -144,9 +141,6 @@ Once you have locked down the internet access to the MySQL database, you will ap
 
 - [Integrate Key Vault with Azure Private Link](https://docs.microsoft.com/azure/key-vault/general/private-link-service?tabs=cli).
 
-<details>
-<summary>hint</summary>
-<br/>
 
 1. To start, you need to create an additional subnet for the private endpoints.
 
@@ -222,7 +216,7 @@ az network vnet subnet create \
       --public-network-access Disabled
    ```
 
-</details>
+
 
 ### Test your setup
 
