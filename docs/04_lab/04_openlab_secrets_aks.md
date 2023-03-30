@@ -1,0 +1,41 @@
+---
+title: 'Lab 4: Secure secrets using Key Vault'
+layout: default
+nav_order: 5
+has_children: true
+---
+
+# Lab 04: Secure application secrets using Key Vault
+
+# Student manual
+
+## Lab scenario
+
+Your team is now running a first version of the spring-petclinic microservice application in Azure. However you don't like the fact that your application secrets live directly in configuration code. Also the GitHub config repo you have, has been reporting to you that it holds secret values. You would like to have a better way to protect application secrets like your database connection string and your GitHub PAT token. In this lab you will better protect your application secrets.
+
+## Objectives
+
+After you complete this lab, you will be able to:
+
+- Create an Azure Key Vault service
+- Add your connection string and GitHub PAT as a secret in Key Vault
+- Add Key Vault CSI driver to your cluster
+- Allow your kubelet identity access to your Key Vault
+- Create a secret provider class to serve secrets from Key Vault to your application
+
+## Lab Duration
+
+- **Estimated Time**: 60 minutes
+
+## Instructions
+
+During this lab, you will:
+
+- Create an Azure Key Vault service
+- Add your connection string and GitHub PAT as a secret in Key Vault
+- Add Key Vault CSI driver to your cluster
+- Allow your kubelet identity access to your Key Vault
+- Create a secret provider class to serve secrets from Key Vault to your application
+
+   > **Note**: The instructions provided in this exercise assume that you successfully completed the previous exercise and are using the same lab environment, including your Git Bash session with the relevant environment variables already set.
+
