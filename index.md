@@ -34,7 +34,7 @@ For running this lab you will need:
 
 ### Installation
 
-The [labstarter branch of the Azure-Samples/spring-petclinic-microservices repository](https://github.com/Azure-Samples/spring-petclinic-microservices/tree/labstarter) contains a dev container for Java development. This container contains all the needed tools for running this lab. In case you want to use this dev container you can either use a [GitHub CodeSpace](https://github.com/features/codespaces) in case your GitHub account is enabled for Codespaces. Or you can use the [Visual Studio Code Remote Containers option](https://code.visualstudio.com/docs/remote/containers).
+The [labstarter branch of the Azure-Samples/spring-petclinic-microservices repository](https://github.com/Azure-Samples/spring-petclinic-microservices/tree/labstarter) contains a dev container for Java development. This container contains all the needed tools for running this lab. In case you want to use this dev container you can either use a [GitHub CodeSpace](https://github.com/features/codespaces) in case your GitHub account is enabled for Codespaces. Or you can use the [Visual Studio Code Remote Containers option](https://code.visualstudio.com/docs/remote/containers). If you use this way of running the lab, you don't need to do any of the below installation.
 
 In case you want to install tooling on your own machine, you will need:
 
