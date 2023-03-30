@@ -37,5 +37,6 @@ During this lab, you will:
 - Allow your kubelet identity access to your Key Vault
 - Create a secret provider class to serve secrets from Key Vault to your application
 
-   > **Note**: The instructions provided in this exercise assume that you successfully completed the previous exercise and are using the same lab environment, including your Git Bash session with the relevant environment variables already set.
+ {: .note }
+The instructions provided in this exercise assume that you successfully completed the previous exercise and are using the same lab environment, including your Git Bash session with the relevant environment variables already set.
 
