@@ -1,0 +1,473 @@
+---
+title: 'Lab: Secure application secrets using Key Vault'
+layout: default
+nav_order: 5
+---
+
+Your team is now running a first version of the spring-petclinic microservice application in Azure. However you don't like the fact that your application secrets live directly in configuration code. Also the GitHub config repo you have, has been reporting to you that it holds secret values. You would like to have a better way to protect application secrets like your database connection string and your GitHub PAT token. In this challenge you will better protect your application secrets.
+
+During the process you'll:
+
+- Create an Azure Key Vault service
+- Add your connection string and GitHub PAT as a secret in Key Vault
+- Add Key Vault CSI driver to your cluster
+- Allow your kubelet identity access to your Key Vault
+- Create a secret provider class to serve secrets from Key Vault to your application
+
+## Create an Azure Key Vault service
+
+As a first step you will need to create a new Azure Key Vault service for holding your application secrets. You can use the below guidance for creating a Key Vault.
+
+> [!div class="nextstepaction"]
+> [Create Key Vault](https://docs.microsoft.com/en-us/azure/spring-cloud/tutorial-managed-identities-key-vault#set-up-your-key-vault)
+
+<details>
+<summary>hint</summary>
+<br/>
+
+1. Create an Azure Key Vault using Azure CLI. Make sure you use a globally unique name for your Key Vault.
+
+```bash
+KEYVAULT_NAME=kv-$APPNAME-$UNIQUEID
+az keyvault create \
+    --name $KEYVAULT_NAME \
+    --resource-group $RESOURCE_GROUP \
+    --location $LOCATION \
+    --sku standard
+```
+
+</details>
+
+## Add your connection string and GitHub PAT as a secret in Key Vault
+
+Now that your Key Vault got created, you will need to add the MySQL database connectionstring and GitHub PAT token to it. You can use the below guidance for doing so.
+
+> [!div class="nextstepaction"]
+> [Add a secret to Key Vault](https://docs.microsoft.com/en-us/azure/spring-cloud/tutorial-managed-identities-key-vault#set-up-your-key-vault)
+
+<details>
+<summary>hint</summary>
+<br/>
+
+1. Add the database username and password as a secret to your Key Vault.
+
+```bash
+az keyvault secret set \
+    --name SPRING-DATASOURCE-USERNAME \
+    --value myadmin \
+    --vault-name $KEYVAULT_NAME
+
+az keyvault secret set \
+    --name SPRING-DATASOURCE-PASSWORD \
+    --value $MYSQL_ADMIN_PASSWORD \
+    --vault-name $KEYVAULT_NAME
+```
+
+1. Also add your GitHub PAT token as a secret in Key VAult.
+
+```bash
+GIT_PAT=<your PAT>
+az keyvault secret set \
+    --name GIT-PAT \
+    --value $GIT_PAT \
+    --vault-name $KEYVAULT_NAME
+```
+
+</details>
+
+## Add Key Vault CSI driver to your cluster
+
+You have now created your Key Vault and added the database connectionstring to it. As a next step you will need to add the Azure Key Vault CSI driver to your cluster. You can follow the below guidance for this.
+
+> [!div class="nextstepaction"]
+> [Upgrade an AKS cluster to use CSI driver](https://docs.microsoft.com/en-us/azure/aks/csi-secrets-store-driver#upgrade-an-existing-aks-cluster-with-azure-key-vault-provider-for-secrets-store-csi-driver-support)
+
+<details>
+<summary>hint</summary>
+<br/>
+
+1. You will need to install the CSI driver add-on on your AKS cluster.
+
+```bash
+az aks enable-addons --addons azure-keyvault-secrets-provider --name $AKSCLUSTER --resource-group $RESOURCE_GROUP
+```
+
+1. If you now issue a get pods statement in the kube-system namespace you will notice extra pods stared running for the secret store CSI driver.
+
+```bash
+kubectl get pods -n kube-system
+```
+
+</details>
+
+## Create a Managed Identity and give it access to your Key Vault
+
+You now have the CSI driver installed, as a next step you will need to allow access from your AKS nodes to your Key Vault. We will use the _System Assigned Managed Identity_ of the AKS Virtual Machine Scale Set.
+
+[system assigned MI](https://docs.microsoft.com/en-us/azure/aks/csi-secrets-store-identity-access#use-a-system-assigned-managed-identity)**
+
+> **Note**: Using the cluster Managed Identity for connecting to the Key Vault service should not be used when your cluster is used by multiple applications that don't share a security context. In that case connecting to the Key Vault with an identity per application security context is the more secure setup.
+
+<details>
+<summary>hint</summary>
+<br/>
+
+1. Each AKS cluster also contains resources in a managed resource group. This is also where the Virtual Machine Scale Set lives. Use the below commang to get a reference to this resource group.
+
+```bash
+MANAGED_RESOURCE_GROUP=$(az aks show -g $RESOURCE_GROUP -n $AKSCLUSTER --query nodeResourceGroup --output tsv)
+```
+
+1. Next, get the name of the node pool.
+
+```bash
+NODE_POOL_NAME=$(az vmss list -g $MANAGED_RESOURCE_GROUP --query [].name --output tsv)
+```
+
+1. You can now use the info on the managed resource group and the node pool to get at the managed identity client ID. This command is taking the second client id of the scale set, this is the one used by the key vault provider.
+
+```bash
+CLIENT_ID=$(az vmss identity show -g $MANAGED_RESOURCE_GROUP  -n $NODE_POOL_NAME --query "userAssignedIdentities.*.clientId | [1]" -o tsv)
+```
+
+1. You will now give this identity permissions to get keys secrets and certificates from your Key Vault.
+
+```bash
+az keyvault set-policy -g $RESOURCE_GROUP -n $KEYVAULT_NAME --key-permissions get --spn $CLIENT_ID
+az keyvault set-policy -g $RESOURCE_GROUP -n $KEYVAULT_NAME --secret-permissions get --spn $CLIENT_ID
+az keyvault set-policy -g $RESOURCE_GROUP -n $KEYVAULT_NAME --certificate-permissions get --spn $CLIENT_ID
+```
+
+</details>
+
+## Create a secret provider class to serve secrets from Key Vault to your application
+
+You now have everything in place to start using Key Vault secrets in your application code. You will need to create a secret provider class and update the YAML definitions for the pets, visits and customers microservices. You can use the below guidance to do so.
+
+> [!div class="nextstepaction"]
+> [Sync mounted content with a Kubernetes secret](https://docs.microsoft.com/en-us/azure/aks/csi-secrets-store-driver#sync-mounted-content-with-a-kubernetes-secret)
+> [!div class="nextstepaction"]
+> [Set an environment variable to reference Kubernetes secrets](https://docs.microsoft.com/en-us/azure/aks/csi-secrets-store-driver#set-an-environment-variable-to-reference-kubernetes-secrets)
+> [!div class="nextstepaction"]
+> [Secrets Store CSI Driver ANV var](https://secrets-store-csi-driver.sigs.k8s.io/topics/set-as-env-var.html)
+
+Make sure the secrets you created in Key Vault show up as environment variables called _SPRING_DATASOURCE_USERNAME_ and _SPRING_DATASOURCE_PASSWORD_ in your customers, vets and visits pods.
+
+<details>
+<summary>hint</summary>
+<br/>
+
+1. As a first step you will create a _SecretProviderClass_.
+
+```bash
+ADTENANT=$(az account show --query tenantId --output tsv)
+
+cat <<EOF | kubectl apply -n spring-petclinic -f -
+apiVersion: secrets-store.csi.x-k8s.io/v1
+kind: SecretProviderClass
+metadata:
+  name: azure-kvname-user-msi
+spec:
+  provider: azure
+  secretObjects:
+  - secretName: pwsecret
+    type: Opaque
+    data: 
+    - objectName: password
+      key: password
+  - secretName: unsecret
+    type: Opaque
+    data: 
+    - objectName: username
+      key: username
+  - secretName: gitpatsecret
+    type: Opaque
+    data: 
+    - objectName: gitpat
+      key: gitpat
+  parameters:
+    usePodIdentity: "false"
+    useVMManagedIdentity: "true" 
+    userAssignedIdentityID: $CLIENT_ID 
+    keyvaultName: $KEYVAULT_NAME
+    cloudName: "" 
+    objects: |
+      array:
+        - |
+          objectName: SPRING-DATASOURCE-USERNAME
+          objectType: secret  
+          objectAlias: username   
+          objectVersion: ""               
+        - |
+          objectName: SPRING-DATASOURCE-PASSWORD
+          objectType: secret   
+          objectAlias: password          
+          objectVersion: ""   
+        - |
+          objectName: GIT-PAT
+          objectType: secret   
+          objectAlias: gitpat          
+          objectVersion: ""  
+    tenantId: $ADTENANT
+EOF
+```
+
+This SecretProviderClass connects to your Key Vault and picks up the _SPRING-DATASOURCE-USERNAME_, _SPRING-DATASOURCE-PASSWORD_ and _GIT-PAT_ Key Vault secrets. These will get mapped to secret objects in your AKS cluster.
+
+1. You can now update your YAML deployment definitions to make use of these secrets and map them to environment variables for your pods. Navigate to the kubernetes directory and update the `spring-petclinic-customers-service.yml`, `spring-petclinic-vets-service.yml` and `spring-petclinic-visits-service.yml` files with 2 additional environment variables that map the secrets created by the `SecretProviderClass`. Add the below lines after the `APPLICATIONINSIGHTS_CONFIGURATION_CONTENT` environment variable and before the `imagePullPolicy`.
+
+```yaml
+        - name: SPRING_DATASOURCE_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: unsecret
+              key: username
+        - name: SPRING_DATASOURCE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: pwsecret
+              key: password
+```
+
+1. In the same directory, update the `spring-petclinic-config-server.yml` with 1 additional environment variable that maps the `gitpatsecret` secret created by the `SecretProviderClass`. Add the below lines after the `APPLICATIONINSIGHTS_CONFIGURATION_CONTENT` environment variable and before the `imagePullPolicy`.
+
+```yaml
+        - name: GIT_PAT
+          valueFrom:
+            secretKeyRef:
+              name: gitpatsecret
+              key: gitpat
+```
+
+1. Also add in all 4 files (`spring-petclinic-config-server.yml`, `spring-petclinic-customers-service.yml`, `spring-petclinic-vets-service.yml` and `spring-petclinic-visits-service.yml`) a volumes definition between the `spec` and `containers` config on line 17 in the YAML file.
+
+```yaml
+      volumes:
+      - name: secrets-store01-inline
+        csi: 
+          driver: secrets-store.csi.k8s.io
+          readOnly: true
+          volumeAttributes: 
+            secretProviderClass: "azure-kvname-user-msi"
+```
+
+  This creates a volume based on the `SecretProviderClass`.
+
+1. And add in all 4 files (`spring-petclinic-config-server.yml`, `spring-petclinic-customers-service.yml`, `spring-petclinic-vets-service.yml` and `spring-petclinic-visits-service.yml`) a `volumeMounts` element after the last environment variable and before the `imagePullPolicy`. `volumeMounts` should be at the same level in the YAML file as the `imagePullPolicy`.
+
+```yaml
+        volumeMounts:
+        - name: secrets-store01-inline
+          mountPath: "/mnt/secrets-store"
+          readOnly: true
+```
+
+Mind the indentation in the Yaml file. Your resulting _spring-petclinic-customers-service.yml_ file should look like this. The other files will look similar:
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: customers-service
+  name: customers-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: customers-service
+  template:
+    metadata:
+      labels:
+        app: customers-service
+    spec:
+      volumes:
+      - name: secrets-store01-inline
+        csi: 
+          driver: secrets-store.csi.k8s.io
+          readOnly: true
+          volumeAttributes: 
+            secretProviderClass: "azure-kvname-user-msi"
+      containers:
+      - image: springlabacra0ddfd.azurecr.io/spring-petclinic-customers-service:2.6.11
+        name: customers-service
+        env:
+        - name: "CONFIG_SERVER_URL"
+          valueFrom:
+            configMapKeyRef:
+              name: config-server
+              key: CONFIG_SERVER_URL
+        - name: "APPLICATIONINSIGHTS_CONNECTION_STRING"
+          valueFrom:
+            configMapKeyRef:
+              name: config-server
+              key: APPLICATIONINSIGHTS_CONNECTION_STRING
+        - name: "APPLICATIONINSIGHTS_CONFIGURATION_CONTENT"
+          value: >-
+            {
+                "role": {   
+                    "name": "customers-service"
+                  }
+            }
+        - name: SPRING_DATASOURCE_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: unsecret
+              key: username
+        - name: SPRING_DATASOURCE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: pwsecret
+              key: password
+        volumeMounts:
+        - name: secrets-store01-inline
+          mountPath: "/mnt/secrets-store"
+          readOnly: true
+        imagePullPolicy: Always
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /actuator/health
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 180
+          successThreshold: 1
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /actuator/health
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 10
+          successThreshold: 1
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+        - containerPort: 9779
+          name: prometheus
+          protocol: TCP
+        - containerPort: 8778
+          name: jolokia
+          protocol: TCP
+        securityContext:
+          privileged: false
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: customers-service
+  name: customers-service
+spec:
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: customers-service
+  type: ClusterIP
+```
+
+> **Note**: We are not really using the volumes and volumeMounts elements, since your spring boot app will rely on environment variables. However these elements are needed so the secrets get loaded in your kubernetes cluster. In case you don't define volumes and volumeMounts you will notive the secretProviderClass being present in the cluster but no additional secrets get created by it. This is because of how the Key Vault CSI driver works.
+
+1. Before you redeploy your microservices, in your config repo, remove the lines in the _application.yml_ file containing the MySQL server username and password. This should be lines 15 and 16.
+
+1. Commit and push these changes to your remote config repository.
+
+```bash
+git add .
+git commit -m 'removed db username and password'
+git push
+```
+
+1. You will also need to update the `application.yml` file of the `config-server` microservice itself, so it does not make use of the hard-coded GitHub PAT token anymore. Navigate to the _spring-petclinic-config-server/src/main/resources/application.yml_ file and update the password of the git repo to use the `GIT_PAT` environment variable.  
+
+```yaml
+          password: ${GIT_PAT}
+```
+
+1. Navigate to the root of the application and rebuild the `spring-petclinic-config-server`.
+
+```bash
+cd ~/projects/spring-petclinic-microservices
+mvn clean package -DskipTests -rf :spring-petclinic-config-server
+```
+
+1. You will also have to rebuild the container image for the `config-server`. Navigate to the `acr-staging` directory, copy over the compiled jar file and rebuild the container.
+
+```bash
+cd staging-acr
+rm *.jar
+cp ../spring-petclinic-config-server/target/spring-petclinic-config-server-$VERSION.jar spring-petclinic-config-server-$VERSION.jar
+
+az acr build \
+    --resource-group $RESOURCE_GROUP \
+    --registry $MYACR \
+    --image spring-petclinic-config-server:$VERSION \
+    --build-arg ARTIFACT_NAME=spring-petclinic-config-server-$VERSION.jar \
+    --build-arg APP_PORT=8888 \
+    --build-arg AI_JAR=ai.jar \
+    .
+```
+
+1. Now re-apply the 4 YAML files in your AKS cluster. Starting with the config server and wait for it to be properly up and running. 
+
+```bash
+kubectl apply -f spring-petclinic-config-server.yml 
+kubectl get pods -w
+```
+
+1. Once the config-server is properly up and running, escape out of the pod watch statement with `Ctrl+Q`. Now in the same way deploy the other 3 microservices.
+
+```bash
+kubectl apply -f spring-petclinic-customers-service.yml
+kubectl apply -f spring-petclinic-visits-service.yml
+kubectl apply -f spring-petclinic-vets-service.yml
+```
+
+1. You should see all your pods properly running again and data being shown in the spring petclinic application.
+
+1. Once you redeployed the microservices, you can check that the secret kubernetes objects got created. In the output you will notice a _gitpatsecret_, _pwsecret_ and _unsecret_ object.
+
+```bash
+kubectl get secrets -n spring-petclinic
+```
+
+1. In case you see errors or crashloops of your pods, you can use the below statements to diagnose what might be going wrong. A first statement you can try is describe your pod.
+
+```bash
+kubectl describe pod <name-of-the-pod> -n spring-petclinic
+```
+
+In the output of the describe statement you should see your environment variables being mapped.
+
+```bash
+    Environment:
+      CONFIG_SERVER_URL:           <set to the key 'CONFIG_SERVER_URL' of config map 'config-server'>       Optional: false
+      SPRING_PROFILES_ACTIVE:      <set to the key 'SPRING_PROFILES_ACTIVE' of config map 'config-server'>  Optional: false
+      SPRING_DATASOURCE_USERNAME:  <set to the key 'username' in secret 'unsecret'>                         Optional: false
+      SPRING_DATASOURCE_PASSWORD:  <set to the key 'password' in secret 'pwsecret'>                         Optional: false
+      KUBERNETES_NAMESPACE:        spring-petclinic (v1:metadata.namespace)
+      HOSTNAME:                    spring-petclinic-customers-service-566d6f7597-qd2c9 (v1:metadata.name)
+```
+
+1. In the logs of a pod you can see specific errors during startup
+
+```bash
+kubectl logs <name-of-the-pod> -n spring-petclinic -f
+```
+
+1. You can also query the environment variables of your pod.
+
+```bash
+kubectl exec -it <name-of-the-pod> -n spring-petclinic -- env 
+```
+
+Here as well you should find back the _SPRING_DATASOURCE_USERNAME_ and _SPRING_DATASOURCE_PASSWORD_ environment variables with their correct values.
+
+1. And lastly, you can connect to the external service IP of the admin server on port 8080 to inspect whether your applications are properly running and what environment variables are loaded.
+
+</details>
