@@ -37,6 +37,6 @@ In this lab, you will:
 - Analyze application specific monitoring data
 - Analyze logs
 
- {: .note }
-The instructions provided in this exercise assume that you successfully completed the previous exercise and are using the same lab environment, including your Git Bash session with the relevant environment variables already set.
+{: .note }
+> The instructions provided in this exercise assume that you successfully completed the previous exercise and are using the same lab environment, including your Git Bash session with the relevant environment variables already set.
 

@@ -35,6 +35,6 @@ During this lab, you will:
 - Update an existing microservice to use the queues
 - Add the message producer
 
- {: .note }
-The instructions provided in this exercise assume that you successfully completed the previous exercise and are using the same lab environment, including your Git Bash session with the relevant environment variables already set.
+{: .note }
+> The instructions provided in this exercise assume that you successfully completed the previous exercise and are using the same lab environment, including your Git Bash session with the relevant environment variables already set.
 
