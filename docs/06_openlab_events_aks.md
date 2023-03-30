@@ -1,20 +1,42 @@
 ---
-title: 'Lab: Create and configure Azure Event Hubs for sending events between microservices'
+title: 'Challenge 6: Send events between microservices'
 layout: default
 nav_order: 7
 ---
 
+# Challenge 06: Create and configure Azure Event Hubs for sending events between microservices
+
+# Student manual
+
+## Challenge scenario
+
 You have now set up messaging for the Spring Petclinic application. As a next step you will set up the receiving of events from an Azure Event Hub.
 
-During the process you'll:
+## Objectives
+
+After you complete this challenge, you will be able to:
+
 - Create an Azure Event Hub resource
 - Use an existing microservice to send events to the Event Hub
 - Update an existing microservice to receive events from the Event Hub
 - Inspect telemetry data being received
 
-**TODO: might make sense if we put a 'conceptual diagram' of this setup**
+## Challenge Duration
 
-# Create Event Hub resource
+- **Estimated Time**: 60 minutes
+
+## Instructions
+
+During this challenge, you will:
+
+- Create an Azure Event Hub resource
+- Use an existing microservice to send events to the Event Hub
+- Update an existing microservice to receive events from the Event Hub
+- Inspect telemetry data being received
+
+   > **Note**: The instructions provided in this exercise assume that you successfully completed the previous exercise and are using the same lab environment, including your Git Bash session with the relevant environment variables already set.
+
+### Create Event Hub resource
 
 You will first need to create an Azure Event Hub namespace to send events to. Create an Event Hub namespace and assign to it a globally unique name. In the namespace you will then create an event hub named `telemetry`. You can use the following guidance to implement these changes:
 
@@ -168,7 +190,7 @@ git push
 
 </details>
 
-# Use an existing microservice to send events to the Event Hub
+### Use an existing microservice to send events to the Event Hub
 
 You will now implement the functionality that will allow you to emulate sending events from a third party system to the telemetry Event Hub. You can find this third party system in the [azure-event-hubs-for-kafka on GitHub](https://github.com/Azure/azure-event-hubs-for-kafka) and use the `quickstart/java/producer`.
 
@@ -220,7 +242,7 @@ Compile the producer app. You will use it at the end of this lab to send 100 eve
 
 </details>
 
-# Update an existing microservice to receive events from the Event Hub
+### Update an existing microservice to receive events from the Event Hub
 
 In this task, you will update the customers microservice to receive events from the telemetry event hub. You can use the following guidance to implement these changes:
 
@@ -496,7 +518,7 @@ kubectl apply -f spring-petclinic-customers-service.yml
 
 </details>
 
-# Inspect telemetry data being received
+### Inspect telemetry data being received
 
 To conclude this lab, you will run the producer app to send 100 events to your event hub and use output logs of the customers microservice to verify that these messages are being received.
 

@@ -1,19 +1,44 @@
 ---
-title: 'Lab: Enable monitoring and end-to-end tracing'
+title: 'Challenge 3: Enable monitoring'
 layout: default
 nav_order: 4
 ---
 
+# Challenge 03: Enable monitoring and end-to-end tracing
+
+# Student manual
+
+## Challenge scenario
+
 You have created your first Azure Kubernetes Service, deployed your applications to it and exposed them through the api-gateway service. Now that everything is up and running, it would be nice to monitor the availability of your applications and to be able to see in case any errors or exceptions in your applications occur. In this challenge you will add end-to-end monitoring to your applications. 
 
-During the process you'll:
+## Objectives
+
+After you complete this challenge, you will be able to:
+
 - Inspect your AKS service in the Azure Portal
 - Configure AKS monitoring
 - Configure Application Insights to receive monitoring information from your applications
 - Analyze application specific monitoring data
 - Analyze logs
 
-## Inspect your AKS service in the Azure Portal
+## Lab Duration
+
+- **Estimated Time**: 60 minutes
+
+## Instructions
+
+In this challenge, you will:
+
+- Inspect your AKS service in the Azure Portal
+- Configure AKS monitoring
+- Configure Application Insights to receive monitoring information from your applications
+- Analyze application specific monitoring data
+- Analyze logs
+
+   > **Note**: The instructions provided in this exercise assume that you successfully completed the previous exercise and are using the same lab environment, including your Git Bash session with the relevant environment variables already set.
+
+### Inspect your AKS service in the Azure Portal
 
 By default the Azure Portal already gives you quite some info on the current status of the resources running in your AKS instance. In this first step of this challenge, open the Azure Portal, navigate to your AKS instance and inspect what info you can find on the kubernetes resources running in the cluster. Find information on: 
 
@@ -74,7 +99,7 @@ kubectl logs <customers-service-pod-instance> -n spring-petclinic
 
 </details>
 
-## Configure AKS monitoring
+### Configure AKS monitoring
 
 Point in time info on your kubernetes resources is nice, however, it is also beneficial to have overall monitoring data available. For this you can enable Container Insights in your cluster. It includes collection of telemetry critical for monitoring, analysis and visualization of collected data to identify trends, and how to configure alerting to be proactively notified of critical issues. 
 
@@ -122,7 +147,7 @@ kubectl get ds ama-logs --namespace=kube-system
 
 > **Note**: Azure Monitor managed service for Prometheus is currently in Public Preview. This is an alternative way for monitoring your kubernetes resources. You can find more info at [Collect Prometheus metrics from AKS cluster (preview)](https://learn.microsoft.com/azure/azure-monitor/essentials/prometheus-metrics-enable?tabs=azure-portal). This can then be visualized by [Azure Managed Grafana](https://learn.microsoft.com/azure/azure-monitor/essentials/prometheus-grafana).
 
-## Configure Application Insights to receive monitoring information from your applications
+### Configure Application Insights to receive monitoring information from your applications
 
 You now know how to set up monitoring for your AKS cluster, however, you would also like to get monitoring info on how your applications run in the cluster. To track Application specific monitoring data, you can use Application Insights. 
 In this next step you will need to create an Application Insights resource and enable application monitoring for each of your microservices. For enabling this, you will not have to change anything in your microservices themselves, you can make use of the Java auto-instrumentation feature of Azure Monitor. The following steps are needed: 
@@ -451,7 +476,7 @@ kubectl get pods -w
 
 </details>
 
-## Analyze application specific monitoring data
+### Analyze application specific monitoring data
 
 Now that Application Insights is properly configured, you can use this service to monitor what is going on in your application. You can follow the below guidance to do so.
 

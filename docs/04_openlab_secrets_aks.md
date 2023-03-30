@@ -1,12 +1,20 @@
 ---
-title: 'Lab: Secure application secrets using Key Vault'
+title: 'Challenge 4: Secure secrets using Key Vault'
 layout: default
 nav_order: 5
 ---
 
+# Challenge 04: Secure application secrets using Key Vault
+
+# Student manual
+
+## Challenge scenario
+
 Your team is now running a first version of the spring-petclinic microservice application in Azure. However you don't like the fact that your application secrets live directly in configuration code. Also the GitHub config repo you have, has been reporting to you that it holds secret values. You would like to have a better way to protect application secrets like your database connection string and your GitHub PAT token. In this challenge you will better protect your application secrets.
 
-During the process you'll:
+## Objectives
+
+After you complete this challenge, you will be able to:
 
 - Create an Azure Key Vault service
 - Add your connection string and GitHub PAT as a secret in Key Vault
@@ -14,7 +22,23 @@ During the process you'll:
 - Allow your kubelet identity access to your Key Vault
 - Create a secret provider class to serve secrets from Key Vault to your application
 
-## Create an Azure Key Vault service
+## Lab Duration
+
+- **Estimated Time**: 60 minutes
+
+## Instructions
+
+During this challenge, you will:
+
+- Create an Azure Key Vault service
+- Add your connection string and GitHub PAT as a secret in Key Vault
+- Add Key Vault CSI driver to your cluster
+- Allow your kubelet identity access to your Key Vault
+- Create a secret provider class to serve secrets from Key Vault to your application
+
+   > **Note**: The instructions provided in this exercise assume that you successfully completed the previous exercise and are using the same lab environment, including your Git Bash session with the relevant environment variables already set.
+
+### Create an Azure Key Vault service
 
 As a first step you will need to create a new Azure Key Vault service for holding your application secrets. You can use the below guidance for creating a Key Vault.
 
@@ -38,7 +62,7 @@ az keyvault create \
 
 </details>
 
-## Add your connection string and GitHub PAT as a secret in Key Vault
+### Add your connection string and GitHub PAT as a secret in Key Vault
 
 Now that your Key Vault got created, you will need to add the MySQL database connectionstring and GitHub PAT token to it. You can use the below guidance for doing so.
 
@@ -75,7 +99,7 @@ az keyvault secret set \
 
 </details>
 
-## Add Key Vault CSI driver to your cluster
+### Add Key Vault CSI driver to your cluster
 
 You have now created your Key Vault and added the database connectionstring to it. As a next step you will need to add the Azure Key Vault CSI driver to your cluster. You can follow the below guidance for this.
 
@@ -100,7 +124,7 @@ kubectl get pods -n kube-system
 
 </details>
 
-## Create a Managed Identity and give it access to your Key Vault
+### Create a Managed Identity and give it access to your Key Vault
 
 You now have the CSI driver installed, as a next step you will need to allow access from your AKS nodes to your Key Vault. We will use the _System Assigned Managed Identity_ of the AKS Virtual Machine Scale Set.
 
@@ -140,7 +164,7 @@ az keyvault set-policy -g $RESOURCE_GROUP -n $KEYVAULT_NAME --certificate-permis
 
 </details>
 
-## Create a secret provider class to serve secrets from Key Vault to your application
+### Create a secret provider class to serve secrets from Key Vault to your application
 
 You now have everything in place to start using Key Vault secrets in your application code. You will need to create a secret provider class and update the YAML definitions for the pets, visits and customers microservices. You can use the below guidance to do so.
 

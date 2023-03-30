@@ -1,5 +1,5 @@
 ---
-title: 'Lab: Secure MySQL database and Key Vault using a Private Endpoint'
+title: 'Challenge 8: Secure MySQL database and Key Vault using a Private Endpoint'
 layout: default
 nav_order: 9
 ---

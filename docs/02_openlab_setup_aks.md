@@ -1,12 +1,33 @@
 ---
-title: 'Lab: Migrate a Spring Apps microservices application to Azure Kubernetes Service'
+title: 'Challenge 2: Migrate to Azure Kubernetes Service'
 layout: default
 nav_order: 3
 ---
 
-NOTE: assumption has been made all versions of all microservices have been updated from 2.6.7 to 2.6.11 and from 2021.0.2 to 2021.0.4!!! (the steps for doing these updates are currently NOT included here, but should be done for succesful run)
+# Challenge 02: Migrate a Spring Apps microservices application to Azure Kubernetes Service
 
-You have established a plan for migrating the Spring Petclinic application to the Azure platform. It is now time to perform the actual migration of the first Spring Petclinic components. 
+# Student manual
+
+## Challenge scenario
+
+You have established a plan for migrating the Spring Petclinic application to Azure Kubernetes Service. It is now time to perform the actual migration of the Spring Petclinic application components.
+
+## Objectives
+
+After you complete this challenge, you will be able to:
+
+- Create an AKS service and Container Registry.
+- Set up a configuration repository.
+- Create an Azure MySQL Database service.
+- Create container images and push them to Azure Container Registry.
+- Deploy the microservices of the Spring Petclinic app to the AKS cluster.
+- Test the application through the publicly available endpoint.
+
+## Challenge Duration
+
+- **Estimated Time**: 120 minutes
+
+## Instructions
 
 During the process you'll:
 - Create an AKS service and Container Registry.
@@ -41,7 +62,7 @@ git config --global user.email "<your-email-address>"
 git config --global user.name "<your-full-name>"
 ```
 
-# Create an AKS service and Container Registry
+### Create an AKS service and Container Registry
 
 As a first step you will need to create your Azure Kubernetes Service together with an Azure Container Registry. Make sure you pre-create as well a virtual network for your AKS service. This will make it easier in the following labs to add additional networking features.You can use the following guidance:
 
@@ -144,7 +165,7 @@ As a first step you will need to create your Azure Kubernetes Service together w
 
 </details>
 
-# Set up a configuration repository
+### Set up a configuration repository
 
 The Spring Petclinic microservices provides a config server that your apps can use. You do need to however provide a git repository for this config server and link this git repo to the server. The current configuration used by the Spring microservices resides in the [labstarter branch of the spring-petclinic-microservices-config repo](https://github.com/Azure-Samples/spring-petclinic-microservices-config/tree/labstarter). You will need to create your own private git repo in this exercise, since, in one of its steps, you will be changing some of the configuration settings.
 
@@ -227,7 +248,7 @@ Once you have your own config repository to work with, you will have to update t
 
 </details>
 
-# Create an Azure MySQL Database service
+### Create an Azure MySQL Database service
 
 You now have the compute service that will host your applications and the config server that will be used by your migrated application. Before you start deploying individual microservices as Azure Spring Apps applications, you need to first create an Azure Database for MySQL Single Server-hosted database for them. To accomplish this, you can use the following guidance:
 
@@ -359,7 +380,7 @@ Your MySQL database will also have a firewall enabled. This firewall will by def
 
    > **Note**: At this point, the admin account user name and password are stored in clear text in the application.yml config file. In one of upcoming exercises, you will remediate this potential vulnerability by removing clear text credentials from your configuration.
 
-# Create container images and push them to Azure Container Registry
+### Create container images and push them to Azure Container Registry
 
 As a next step you will need to containerize your different microservice applications. You can do so by using the below starter for containerizing a spring boot application.
 
@@ -602,7 +623,7 @@ ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
 
 </details>
 
-# Deploy the microservices of the Spring Petclinic app to the AKS cluster
+### Deploy the microservices of the Spring Petclinic app to the AKS cluster
 
 You now have an AKS cluster deployed and a container registry holding all the microservices docker images. As a next step you will deploy these images from the container registry to your AKS cluster.
 
@@ -1071,7 +1092,7 @@ spring-petclinic-visits-service-57c56db5fb-gzsbh      1/1     Running   0       
 
 </details>
 
-# Test the application through the publicly available endpoint
+### Test the application through the publicly available endpoint
 
 Now that you have deployed each of the microservices, you will test them out to see if they were deployed correctly. Also inspect wether all pods are properly up and running. In case they are not, inspect the logs to figure out what might be missing.
 

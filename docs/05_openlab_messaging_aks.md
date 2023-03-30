@@ -1,20 +1,42 @@
 ---
-title: 'Lab: Create and configure Azure Service Bus for sending messages between microservices'
+title: 'Challenge 5: Send messages between microservices'
 layout: default
 nav_order: 6
 ---
 
+# Challenge 05: Create and configure Azure Service Bus for sending messages between microservices
+
+# Student manual
+
+## Challenge scenario
+
 You have now set up and deployed the Spring Petclinic application. Some of the microservices however also need to send messages to a third party system over a message bus and you also want to enable the intake of telemetry events. You want to provide this functionality with native Azure services like Azure Service Bus and Azure Event Hub. In a first step you will provide the messaging behavior.
 
-During the process you'll:
+## Objectives
+
+After you complete this challenge, you will be able to:
+
 - Create an Azure Service Bus resource
 - Try out an existing microservice
 - Update an existing microservice to use the queues
 - Add the message producer
 
-**TODO: might make sense if we put a 'conceptual diagram' of this setup**
+## Challenge Duration
 
-# Create an Azure Service Bus resource
+- **Estimated Time**: 60 minutes
+
+## Instructions
+
+During this challenge, you will:
+
+- Create an Azure Service Bus resource
+- Try out an existing microservice
+- Update an existing microservice to use the queues
+- Add the message producer
+
+   > **Note**: The instructions provided in this exercise assume that you successfully completed the previous exercise and are using the same lab environment, including your Git Bash session with the relevant environment variables already set.
+
+### Create an Azure Service Bus resource
 
 First, you need to create an Azure Service Bus namespace and one or more queues to send messages to. In your implementation, you will create a queue named `visits-requests`. You can use the following guidance to implement these changes:
 
@@ -143,7 +165,7 @@ git push
 
 </details>
 
-# Try out an existing microservice
+### Try out an existing microservice
 
 In the spring-petclinic-microservices repository, the `spring-petclinic-messaging-emulator` microservice is already prepared to send messages to an Azure Service Bus namespace. You can add this microservice to your current Spring Petclinic project in the parent `pom.xml` file, deploy it as an extra microservice in your AKS cluster and use this microservice's public endpoint to send messages to your Service Bus namespace. Test this functionality and inspect whether messages end up in the Service Bus namespace you just created by using the Service Bus Explorer for the `visits-requests` queue. You can use the following guidance to implement these changes:
 
@@ -432,7 +454,7 @@ You might want to inspect the code of the `messaging-emulator` microservice. Tak
 
 In the next steps you will add similar functionality to the `visits` service.
 
-# Update an existing microservice to use the queues
+### Update an existing microservice to use the queues
 
 You have now reviewed how an existing microservice interacts with the Service Bus queue. In the upcoming task, you will enable the `visits` microservice to also read messages from a queue and write messages to another queue. You can use the following guidance to implement these changes:
 
@@ -456,7 +478,7 @@ To start, you will need to add the necessary dependencies.
 
 </details>
 
-# Add the message producers and listeners
+### Add the message producers and listeners
 
 You will next add the code required to send and receive messages to the `visits` service. The `message-emulator` will send a `PetClinicMessageRequest` to the `visits-requests` queue. The `visits` service will need to listen to this queue and each time a `VisitRequest` message is submitted, it will create a new `Visit` for the pet ID referenced in the message. The `visits` service will also send back a `VisitResponse` as a confirmation to the `visits-confirmations` queue. This is the queue the `message-emulator` is listening to.
 

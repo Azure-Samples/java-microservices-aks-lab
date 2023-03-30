@@ -1,10 +1,10 @@
 ---
-title: 'Lab: Plan a Java application migration to Azure Kubernetes Service'
+title: 'Challenge 1: Plan the Migration'
 layout: default
 nav_order: 2
 ---
 
-# Challenge: Plan a Java application migration to Azure Kubernetes Service
+# Challenge 01: Plan a Java application migration to Azure Kubernetes Service
 
 # Student manual
 
