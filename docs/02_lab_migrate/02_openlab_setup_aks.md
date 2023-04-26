@@ -40,7 +40,7 @@ During the process you'll:
 
 
 {: .note }
-> The labstarter branch of the Azure-Samples/spring-petclinic-microservices repository contains a dev container for Java development. This container contains all the needed tools for running this lab. In case you want to use this dev container you can either use a [GitHub CodeSpace](https://github.com/features/codespaces) in case your GitHub account is enabled for Codespaces. Or you can use the [Visual Studio Code Remote Containers option](https://code.visualstudio.com/docs/remote/containers).
+> The Azure-Samples/java-microservices-aks-lab repository contains a dev container for Java development. This container contains all the needed tools for running this lab. In case you want to use this dev container you can either use a [GitHub CodeSpace](https://github.com/features/codespaces) in case your GitHub account is enabled for Codespaces. Or you can use the [Visual Studio Code Remote Containers option](https://code.visualstudio.com/docs/remote/containers).
 
 {: .note }
 > This lab contains guidance for a Windows workstation. Your workstation should contain the following components:
