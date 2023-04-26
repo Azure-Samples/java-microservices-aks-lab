@@ -40,5 +40,5 @@ For running this lab with all the needed tooling, there are 3 options available:
 - Using Visual Studio Code with remote containers option
 - Install all the tools on your local machine
 
-Full installation guidance and options for running this lab can be found in the [Installation](install.md) instructions.
+Full installation guidance and options for running this lab can be found in the [Installation]({{ site.baseurl }}{% link install.md %}) instructions.
 
