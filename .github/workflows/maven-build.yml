@@ -6,8 +6,10 @@ name: Java CI with Maven
 on:
   push:
     branches: [ main ]
+    paths: 'src/**'
   pull_request:
     branches: [ main ]
+    paths: 'src/**'
 
 jobs:
   build:
