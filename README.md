@@ -1,6 +1,6 @@
 # Lab: Running Java microservice on an Azure Kubernetes Service
 
-This lab teaches you how to deploy the [Spring Petclinic Microservices](https://github.com/Azure-Samples/spring-petclinic-microservices/tree/labstarter) application to an AKS cluster and integrate it with additional Azure services.
+This lab teaches you how to deploy the [Spring Petclinic Microservices](https://github.com/Azure-Samples/java-microservices-aks-lab/tree/main/src) application to an AKS cluster and integrate it with additional Azure services.
 
 ## Modules
 
@@ -28,7 +28,7 @@ For running this lab you will need:
 
 ### Installation
 
-The [labstarter branch of the Azure-Samples/spring-petclinic-microservices repository](https://github.com/Azure-Samples/spring-petclinic-microservices/tree/labstarter) contains a dev container for Java development. This container contains all the needed tools for running this lab. In case you want to use this dev container you can either use a [GitHub CodeSpace](https://github.com/features/codespaces) in case your GitHub account is enabled for Codespaces. Or you can use the [Visual Studio Code Remote Containers option](https://code.visualstudio.com/docs/remote/containers). If you use the Visual Studio Code Remote Containers option you will also need to have [docker](https://docs.docker.com/get-docker/) installed.
+The [git repository of this lab](https://github.com/Azure-Samples/java-microservices-aks-lab) contains a dev container for Java development. This container contains all the needed tools for running this lab. In case you want to use this dev container you can either use a [GitHub CodeSpace](https://github.com/features/codespaces) in case your GitHub account is enabled for Codespaces. Or you can use the [Visual Studio Code Remote Containers option](https://code.visualstudio.com/docs/remote/containers). If you use the Visual Studio Code Remote Containers option you will also need to have [docker](https://docs.docker.com/get-docker/) installed.
 
 In case you want to install tooling on your own machine, you will need:
 
