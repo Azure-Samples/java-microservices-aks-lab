@@ -30,17 +30,6 @@ The [git repository of this lab](https://github.com/Azure-Samples/java-microserv
 
    Your codespace will now get created in your browser window. Once creation is done, navigate into the `/src` directory and you can start executing the next steps of the lab. 
 
-There is are a couple of steps in the lab which are easier to execute on your local system instead of in the GitHub CodeSpace. These are the steps that interact with the config repository for the lab. For these steps you should have the following installed on your local system: 
-
-- Git for Windows 2.3.61 available from [Git Downloads](https://git-scm.com/downloads), or similar on another OS.
-  - **Note**: If needed, reinstall Git and, during installation, ensure that the Git Credential Manager is enabled.
-
-{: .note }
-> Following the installation of Git, ensure to set the global configuration variables `user.email` and `user.name` by running the following commands from the Git Bash shell (replace the `<your-email-address>` and `<your-full-name>` placeholders with your email address and your full name):
-```bash
-git config --global user.email "<your-email-address>"
-git config --global user.name "<your-full-name>"
-```
 
 ## Using Visual Studio Code with remote containers
 
