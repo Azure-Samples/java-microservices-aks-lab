@@ -22,6 +22,10 @@ After you complete this lab, you will be able to:
 - Update an existing microservice to receive events from the Event Hub
 - Inspect telemetry data being received
 
+The below image illustrates the end state you will be building in this lab.
+
+![lab 6 overview](../../images/lab6.png)
+
 ## Lab Duration
 
 - **Estimated Time**: 60 minutes

@@ -24,6 +24,10 @@ After you complete this lab, you will be able to:
 - Deploy the microservices of the Spring Petclinic app to the AKS cluster.
 - Test the application through the publicly available endpoint.
 
+The below image illustrates the end state you will be building in this lab.
+
+![lab 2 overview](../../images/lab2.png)
+
 ## Lab Duration
 
 - **Estimated Time**: 120 minutes

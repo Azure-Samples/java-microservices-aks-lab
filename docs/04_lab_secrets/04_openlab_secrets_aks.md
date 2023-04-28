@@ -23,6 +23,10 @@ After you complete this lab, you will be able to:
 - Allow your kubelet identity access to your Key Vault
 - Create a secret provider class to serve secrets from Key Vault to your application
 
+The below image illustrates the end state you will be building in this lab.
+
+![lab 4 overview](../../images/lab4.png)
+
 ## Lab Duration
 
 - **Estimated Time**: 60 minutes
