@@ -6,7 +6,7 @@ spring:
         git:
           uri: https://github.com/slammini/spring-petclinic-microservices-config.git
           username: slammini
-          password: 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
+          password: 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
           default-label: main
         # Use the File System Backend to avoid git pulling. Enable "native" profile in the Config Server.
         native:
