@@ -1,0 +1,71 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: #appname#
+  name: #appname#
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: #appname#
+  template:
+    metadata:
+      labels:
+        app: #appname#
+    spec:
+      containers:
+      - image: #image#
+        name: #appname#
+        env:
+        - name: "CONFIG_SERVER_URL"
+          valueFrom:
+            configMapKeyRef:
+              name: config-server
+              key: CONFIG_SERVER_URL
+        imagePullPolicy: Always
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /actuator/health
+            port: #appport#
+            scheme: HTTP
+          initialDelaySeconds: 180
+          successThreshold: 1
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /actuator/health
+            port: #appport#
+            scheme: HTTP
+          initialDelaySeconds: 10
+          successThreshold: 1
+        ports:
+        - containerPort: #appport#
+          name: http
+          protocol: TCP
+        - containerPort: 9779
+          name: prometheus
+          protocol: TCP
+        - containerPort: 8778
+          name: jolokia
+          protocol: TCP
+        securityContext:
+          privileged: false
+   
+   
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: #appname#
+  name: #service_name#
+spec:
+  ports:
+  - port: #appport#
+    protocol: TCP
+    targetPort: #appport#
+  selector:
+    app: #appname#
+  type: #service_type#
