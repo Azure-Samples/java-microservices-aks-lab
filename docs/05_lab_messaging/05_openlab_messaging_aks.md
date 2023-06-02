@@ -22,6 +22,10 @@ After you complete this lab, you will be able to:
 - Update an existing microservice to use the queues
 - Add the message producer
 
+The below image illustrates the end state you will be building in this lab.
+
+![lab 5 overview](../../images/lab5.png)
+
 ## Lab Duration
 
 - **Estimated Time**: 60 minutes

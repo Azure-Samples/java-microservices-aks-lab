@@ -25,6 +25,10 @@ After you complete this lab, you will be able to:
 - Expose the admin server
 - Configure WAF on Application Gateway
 
+The below image illustrates the end state you will be building in this lab.
+
+![lab 7 overview](../../images/lab7.png)
+
 ## Lab Duration
 
 - **Estimated Time**: 60 minutes

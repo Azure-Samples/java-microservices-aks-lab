@@ -23,6 +23,10 @@ After you complete this lab, you will be able to:
 - Analyze application specific monitoring data
 - Analyze logs
 
+The below image illustrates the end state you will be building in this lab.
+
+![lab 3 overview](../../images/lab3.png)
+
 ## Lab Duration
 
 - **Estimated Time**: 60 minutes
