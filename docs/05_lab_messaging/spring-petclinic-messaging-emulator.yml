@@ -13,7 +13,9 @@ spec:
     metadata:
       labels:
         app: messaging-emulator
+        azure.workload.identity/use: "true"
     spec:
+      serviceAccountName: workload-identity-sa
       volumes:
       - name: secrets-store01-inline
         csi: 
@@ -42,16 +44,6 @@ spec:
                     "name": "messaging-emulator"
                   }
             }
-        - name: SPRING_DATASOURCE_USERNAME
-          valueFrom:
-            secretKeyRef:
-              name: unsecret
-              key: username
-        - name: SPRING_DATASOURCE_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: pwsecret
-              key: password
         - name: SPRING_JMS_SERVICEBUS_CONNECTIONSTRING
           valueFrom:
             secretKeyRef:
