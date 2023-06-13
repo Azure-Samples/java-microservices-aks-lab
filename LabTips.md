@@ -12,7 +12,8 @@ An overview of the tips in this section:
 - .azcli files will save your day
 - On error perform these steps
 - Not all steps are running smoothly in the codespace (unfortunately)
-- Don't commit your GitHub PAT token
+- Don't commit your GitHub PAT 
+- In case the GitHub PAT really doesn't work for you
 
 # Use Codespaces
 
@@ -155,3 +156,11 @@ As long as the GitHub PAT token is inside the code of the `config-server`, do no
 In case this accidentally happens to you, you will need to recreate or re-issue the PAT token and perform a full rebuild and redeploy of the config server with the new GitHub PAT.
 
 In case you still might want to commit and push your code changes to GitHub, make sure to exclude the `application.yml` file from the config-server.
+
+# In case the GitHub PAT really doesn't work for you
+
+Ok, you tried accessing the private config repo through the PAT experience, but unfortunately this keeps on failing for you. We've seen this happen from time to time for some people. No worries, you tried, we are very happy that you did. But it would also be great if you could continue through the lab without this PAT constantly failing on you.
+
+Before executing the below fix, do understand that during the execution of the lab your config repo **will** contain secret values for certain resources of the lab. Make sure your do **not** use any password values that you use anywhere else (you shouldn't do that anyways by the way).
+
+So no worries, make your config repo public and proceed! You may need to also restart your config repo pod to get everything up and running again.
