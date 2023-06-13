@@ -18,7 +18,7 @@ You have now set up messaging for the Spring Petclinic application. As a next st
 After you complete this lab, you will be able to:
 
 - Create an Azure Event Hub resource
-- Use an existing microservice to send events to the Event Hub
+- Update an existing microservice to send events to the Event Hub
 - Update an existing microservice to receive events from the Event Hub
 - Inspect telemetry data being received
 
