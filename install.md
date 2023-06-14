@@ -9,6 +9,7 @@ nav_order: 2
 
 For running this lab with all the needed tooling, there are 3 options available:
 
+- TOC
 {:toc}
 
    {: .important }
