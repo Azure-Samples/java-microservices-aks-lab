@@ -163,7 +163,7 @@ Once all these tools are installed, to get started you need to:
 
 1. In the browser window, enter your GitHub credentials, select **Sign in**, and, once successfully signed in, close the newly opened browser tab.
 
-1. In projects folder double check that the spring petclinic application got cloned correctly. You can use the repository in your projects folder to regularly push your changes to.
+1. In workspaces folder double check that the spring petclinic application got cloned correctly. You can use the repository in your workspaces folder to regularly push your changes to.
 
 1. Navigate into the `java-microservices-aks-lab/src` folder that got created.
 

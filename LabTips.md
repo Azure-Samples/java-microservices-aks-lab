@@ -49,7 +49,7 @@ To rebuild and redeploy a failing microservice:
 1. Navigate to the root of the application and rebuild the specific microservice.
 
    ```bash
-   cd ~/projects/java-microservices-aks-lab/src
+   cd ~/workspaces/java-microservices-aks-lab/src
    mvn clean package -DskipTests -rf :spring-petclinic-<microservice-name>
    ```
 
@@ -124,7 +124,7 @@ In case you made an error in the config repo. Fixing that error in the config re
 1. re-apply the yaml file.
 
    ```bash
-   cd ~/projects/java-microservices-aks-lab/src/kubernetes
+   cd ~/workspaces/java-microservices-aks-lab/src/kubernetes
    kubectl apply -f spring-petclinic-<service-name>.yml
    ```
 
