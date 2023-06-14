@@ -5,19 +5,12 @@ nav_order: 11
 ---
 
 # A couple of tips when you run this lab
+{: .no_toc }
 
 An overview of the tips in this section:
 
-- [A couple of tips when you run this lab](#a-couple-of-tips-when-you-run-this-lab)
-  - [Use Codespaces](#use-codespaces)
-  - [.azcli files will save your day](#azcli-files-will-save-your-day)
-  - [On error perform these steps](#on-error-perform-these-steps)
-    - [In case you made a coding error](#in-case-you-made-a-coding-error)
-    - [Config error](#config-error)
-    - [In case there is an error in the kubernetes/\*.yml files](#in-case-there-is-an-error-in-the-kubernetesyml-files)
-  - [Not all steps are running smoothly in the codespace (unfortunately)](#not-all-steps-are-running-smoothly-in-the-codespace-unfortunately)
-  - [Don't commit your GitHub PAT token](#dont-commit-your-github-pat-token)
-  - [In case the GitHub PAT really doesn't work for you](#in-case-the-github-pat-really-doesnt-work-for-you)
+- TOC
+{:toc}
 
 ## Use Codespaces
 
