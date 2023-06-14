@@ -165,7 +165,7 @@ Once all these tools are installed, to get started you need to:
 
 1. In workspaces folder double check that the spring petclinic application got cloned correctly. You can use the repository in your workspaces folder to regularly push your changes to.
 
-1. Navigate into the `java-microservices-aks-lab/src` folder that got created.
+1. Navigate into the _java-microservices-aks-lab/src_ folder that got created.
 
    ```bash
    cd java-microservices-aks-lab/src

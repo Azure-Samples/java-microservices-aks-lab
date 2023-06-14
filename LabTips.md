@@ -20,9 +20,9 @@ The least best option is with a local install of all the tooling. You can get un
 
 ## .azcli files will save your day
 
-In case you are using Visual Studio Code, you can record your statements in a file with the **.azcli** extension. This extension in combination with the [Azure CLI Tools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.azurecli) gives you extra capabilities like IntelliSense and directly running a statement from the script file in the terminal window. 
+In case you are using Visual Studio Code, you can record your statements in a file with the _.azcli_ extension. This extension in combination with the [Azure CLI Tools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.azurecli) gives you extra capabilities like IntelliSense and directly running a statement from the script file in the terminal window. 
 
-When using this extension you can keep a record of all the steps you executed in an **.azcli** file and quickly execute these statements through the `Ctrl+'` shortcut. Check out the extension, it will save you time in the lab!
+When using this extension you can keep a record of all the steps you executed in an _.azcli_ file and quickly execute these statements through the `Ctrl+'` shortcut. Check out the extension, it will save you time in the lab!
 
 ## On error perform these steps
 
@@ -53,7 +53,7 @@ To rebuild and redeploy a failing microservice:
    mvn clean package -DskipTests -rf :spring-petclinic-<microservice-name>
    ```
 
-1.  Rebuild the container image for the microservice. Navigate to the `acr-staging` directory, copy over the compiled jar file and rebuild the container.
+1.  Rebuild the container image for the microservice. Navigate to the _acr-staging_ directory, copy over the compiled jar file and rebuild the container.
 
    ```bash
    cd staging-acr
@@ -152,7 +152,7 @@ As long as the GitHub PAT token is inside the code of the `config-server`, do no
 
 In case this accidentally happens to you, you will need to recreate or re-issue the PAT token and perform a full rebuild and redeploy of the config server with the new GitHub PAT.
 
-In case you still might want to commit and push your code changes to GitHub, make sure to exclude the `application.yml` file from the config-server.
+In case you still might want to commit and push your code changes to GitHub, make sure to exclude the _application.yml_ file from the config-server.
 
 ### In case the GitHub PAT really doesn't work for you
 
@@ -168,6 +168,6 @@ In case you are using a codespace for running this lab, your environment variabl
 
 You can find a [samplebashrc file](https://github.com/Azure-Samples/java-microservices-aks-lab/blob/main/solution/samplebashrc) in this repository. You will need to update a couple of values in this file for your specific situation.
 
-Another approach would be to create a dedicated **.azcli** file where you keep all environment variables. After a workspace restart, you first rerun all the steps in this file and you are good to go again. 
+Another approach would be to create a dedicated _.azcli_ file where you keep all environment variables. After a workspace restart, you first rerun all the steps in this file and you are good to go again.
 
 You can find a [sampleENVIRONMENT.azcli file](https://github.com/Azure-Samples/java-microservices-aks-lab/blob/main/solution/sampleENVIRONMENT.azcli) in this repository. You will need to update a couple of values in this file for your specific situation.
