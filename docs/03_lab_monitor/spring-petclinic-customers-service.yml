@@ -1,0 +1,83 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: customers-service
+  name: customers-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: customers-service
+  template:
+    metadata:
+      labels:
+        app: customers-service
+    spec:
+      containers:
+      - image: #image#
+        name: customers-service
+        env:
+        - name: "CONFIG_SERVER_URL"
+          valueFrom:
+            configMapKeyRef:
+              name: config-server
+              key: CONFIG_SERVER_URL
+        - name: "APPLICATIONINSIGHTS_CONNECTION_STRING"
+          valueFrom:
+            configMapKeyRef:
+              name: config-server
+              key: APPLICATIONINSIGHTS_CONNECTION_STRING
+        - name: "APPLICATIONINSIGHTS_CONFIGURATION_CONTENT"
+          value: >-
+            {
+                "role": {   
+                    "name": "customers-service"
+                  }
+            }
+        imagePullPolicy: Always
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /actuator/health
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 180
+          successThreshold: 1
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /actuator/health
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 10
+          successThreshold: 1
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+        - containerPort: 9779
+          name: prometheus
+          protocol: TCP
+        - containerPort: 8778
+          name: jolokia
+          protocol: TCP
+        securityContext:
+          privileged: false
+   
+   
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: customers-service
+  name: customers-service
+spec:
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: customers-service
+  type: ClusterIP
