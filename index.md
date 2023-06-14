@@ -32,16 +32,17 @@ The lab is available as GitHub pages [here](https://azure-samples.github.io/java
 
 For running this lab you will need:
 
-- A GitHub account
-- An Azure Subscription
+* A GitHub account
+* An Azure Subscription
 
 ### Installation
 
-For running this lab with all the needed tooling, there are 3 options available: 
+For running this lab with all the needed tooling, there are 3 options available:
 
-- Using a GitHub codespace  
-- Using Visual Studio Code with remote containers option
-- Install all the tools on your local machine
+* Using a GitHub codespace  
+* Using Visual Studio Code with remote containers option
+* Install all the tools on your local machine
+
+All the steps of this lab have been tested in the GitHub CodeSpace. This is the preferred option for running this lab!
 
 Full installation guidance and options for running this lab can be found in the [Installation]({% link install.md %}) instructions.
-
