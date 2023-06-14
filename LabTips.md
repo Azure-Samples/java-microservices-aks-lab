@@ -8,26 +8,30 @@ nav_order: 11
 
 An overview of the tips in this section:
 
-- Use Codespaces
-- .azcli files will save your day
-- On error perform these steps
-- Not all steps are running smoothly in the codespace (unfortunately)
-- Don't commit your GitHub PAT 
-- In case the GitHub PAT really doesn't work for you
+- [A couple of tips when you run this lab](#a-couple-of-tips-when-you-run-this-lab)
+  - [Use Codespaces](#use-codespaces)
+  - [.azcli files will save your day](#azcli-files-will-save-your-day)
+  - [On error perform these steps](#on-error-perform-these-steps)
+    - [In case you made a coding error](#in-case-you-made-a-coding-error)
+    - [Config error](#config-error)
+    - [In case there is an error in the kubernetes/\*.yml files](#in-case-there-is-an-error-in-the-kubernetesyml-files)
+  - [Not all steps are running smoothly in the codespace (unfortunately)](#not-all-steps-are-running-smoothly-in-the-codespace-unfortunately)
+  - [Don't commit your GitHub PAT token](#dont-commit-your-github-pat-token)
+  - [In case the GitHub PAT really doesn't work for you](#in-case-the-github-pat-really-doesnt-work-for-you)
 
-# Use Codespaces
+## Use Codespaces
 
 The best and easiest way to run this lab is definitely through the use of a codespace. It has all the tools pre-installed for you. All the steps as well have been tested through the codespace that is included in the repo. The second best alternative is using Visual Studio Code locally with the remote containers option.
 
 The least best option is with a local install of all the tooling. You can get unexpected errors when using this option. Try to avoid it if you can. We still provide it as an alternative for people who really can't use the codespace or remote containers.
 
-# .azcli files will save your day
+## .azcli files will save your day
 
 In case you are using Visual Studio Code, you can record your statements in a file with the **.azcli** extension. This extension in combination with the [Azure CLI Tools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.azurecli) gives you extra capabilities like IntelliSense and directly running a statement from the script file in the terminal window. 
 
 When using this extension you can keep a record of all the steps you executed in an **.azcli** file and quickly execute these statements through the `Ctrl+'` shortcut. Check out the extension, it will save you time in the lab!
 
-# On error perform these steps
+## On error perform these steps
 
 There are a couple of places in the lab where the steps you need to execute include easy to miss steps. In case of any error the default way to recover from the error is:
 
@@ -43,7 +47,7 @@ There are a couple of places in the lab where the steps you need to execute incl
    kubectl logs <pod-name>
    ```
 
-## In case you made a coding error
+### In case you made a coding error
 
 In case you see you made a coding error, you will need to rebuild and redeploy the specific failing microservice.
 
@@ -82,7 +86,7 @@ To rebuild and redeploy a failing microservice:
    kubectl delete pod <pod-name> 
    ```
 
-## Config error
+### Config error
 
 In case you made an error in the config repo. Fixing that error in the config repo and restarting services should be enough to recover:
 
@@ -120,7 +124,7 @@ In case you made an error in the config repo. Fixing that error in the config re
    kubectl delete pod <config-dependent-pod> 
    ```
 
-## In case there is an error in the kubernetes/*.yml files
+### In case there is an error in the kubernetes/*.yml files
 
 1. Fix the error in the kubernetes/*.yml file
 
@@ -137,7 +141,7 @@ In case you made an error in the config repo. Fixing that error in the config re
    kubectl get pods -w
    ```
 
-# Not all steps are running smoothly in the codespace (unfortunately)
+## Not all steps are running smoothly in the codespace (unfortunately)
 
 It might be that some steps do not run smoothly in a codespace on some more locked down environments.
 
@@ -147,7 +151,7 @@ In case you use a subscription that has additional policies that lock down what 
 
 How to recover: re-execute the step in a cloud shell window.
 
-# Don't commit your GitHub PAT token
+## Don't commit your GitHub PAT token
 
 In Lab 2 you will make use of a hard-coded GitHub PAT token inside the code of the `config-server`. This token will be removed again during the course of lab 4. 
 
@@ -157,7 +161,7 @@ In case this accidentally happens to you, you will need to recreate or re-issue 
 
 In case you still might want to commit and push your code changes to GitHub, make sure to exclude the `application.yml` file from the config-server.
 
-# In case the GitHub PAT really doesn't work for you
+## In case the GitHub PAT really doesn't work for you
 
 Ok, you tried accessing the private config repo through the PAT experience, but unfortunately this keeps on failing for you. We've seen this happen from time to time for some people. No worries, you tried, we are very happy that you did. But it would also be great if you could continue through the lab without this PAT constantly failing on you.
 

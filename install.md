@@ -6,11 +6,14 @@ nav_order: 2
 
 # Installation
 
-For running this lab with all the needed tooling, there are 3 options available: 
+For running this lab with all the needed tooling, there are 3 options available:
 
-- Using a GitHub codespace  
-- Using Visual Studio Code with remote containers option
-- Install all the tools on your local machine
+- [Installation](#installation)
+  - [Using a GitHub Codespace](#using-a-github-codespace)
+  - [Using Visual Studio Code with remote containers](#using-visual-studio-code-with-remote-containers)
+  - [Install all the tools on your local machine](#install-all-the-tools-on-your-local-machine)
+
+All the steps of this lab have been tested in the [GitHub CodeSpace](#using-a-github-codespace). This is the preferred option for running this lab!
 
 ## Using a GitHub Codespace
 
