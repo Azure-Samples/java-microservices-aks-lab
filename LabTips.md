@@ -154,10 +154,20 @@ In case this accidentally happens to you, you will need to recreate or re-issue 
 
 In case you still might want to commit and push your code changes to GitHub, make sure to exclude the `application.yml` file from the config-server.
 
-## In case the GitHub PAT really doesn't work for you
+### In case the GitHub PAT really doesn't work for you
 
 Ok, you tried accessing the private config repo through the PAT experience, but unfortunately this keeps on failing for you. We've seen this happen from time to time for some people. No worries, you tried, we are very happy that you did. But it would also be great if you could continue through the lab without this PAT constantly failing on you.
 
 Before executing the below fix, do understand that during the execution of the lab your config repo **will** contain secret values for certain resources of the lab. Make sure your do **not** use any password values that you use anywhere else (you shouldn't do that anyways by the way).
 
 So no worries, make your config repo public and proceed! You may need to also restart your config repo pod to get everything up and running again.
+
+## Persisting environment variables in a GitHub Codespace
+
+In case you are using a codespace for running this lab, your environment variables will be lost if the codespace restarts. For persisting these environment variables, you can either use the [guidance that GitHub provides for this](https://docs.github.com/en/enterprise-cloud@latest/codespaces/developing-in-codespaces/persisting-environment-variables-and-temporary-files). We recommend the [single workspace](https://docs.github.com/en/enterprise-cloud@latest/codespaces/developing-in-codespaces/persisting-environment-variables-and-temporary-files#for-a-single-codespace) approach, since that is the easiest to set up and doesn't require workspace restart.
+
+You can find a [samplebashrc file](https://github.com/Azure-Samples/java-microservices-aks-lab/blob/main/solution/samplebashrc) in this repository. You will need to update a couple of values in this file for your specific situation.
+
+Another approach would be to create a dedicated **.azcli** file where you keep all environment variables. After a workspace restart, you first rerun all the steps in this file and you are good to go again. 
+
+You can find a [sampleENVIRONMENT.azcli file](https://github.com/Azure-Samples/java-microservices-aks-lab/blob/main/solution/sampleENVIRONMENT.azcli) in this repository. You will need to update a couple of values in this file for your specific situation.
