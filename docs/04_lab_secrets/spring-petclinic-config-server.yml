@@ -1,0 +1,83 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: config-server
+  name: config-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: config-server
+  template:
+    metadata:
+      labels:
+        app: config-server
+    spec:
+      containers:
+      - image: #image#
+        name: config-server
+        env:
+        - name: "CONFIG_SERVER_URL"
+          valueFrom:
+            configMapKeyRef:
+              name: config-server
+              key: CONFIG_SERVER_URL
+        - name: "APPLICATIONINSIGHTS_CONNECTION_STRING"
+          valueFrom:
+            configMapKeyRef:
+              name: config-server
+              key: APPLICATIONINSIGHTS_CONNECTION_STRING
+        - name: "APPLICATIONINSIGHTS_CONFIGURATION_CONTENT"
+          value: >-
+            {
+                "role": {   
+                    "name": "config-server"
+                  }
+            }
+        imagePullPolicy: Always
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /actuator/health
+            port: 8888
+            scheme: HTTP
+          initialDelaySeconds: 180
+          successThreshold: 1
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /actuator/health
+            port: 8888
+            scheme: HTTP
+          initialDelaySeconds: 10
+          successThreshold: 1
+        ports:
+        - containerPort: 8888
+          name: http
+          protocol: TCP
+        - containerPort: 9779
+          name: prometheus
+          protocol: TCP
+        - containerPort: 8778
+          name: jolokia
+          protocol: TCP
+        securityContext:
+          privileged: false
+   
+   
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: config-server
+  name: config-server
+spec:
+  ports:
+  - port: 8888
+    protocol: TCP
+    targetPort: 8888
+  selector:
+    app: config-server
+  type: ClusterIP
