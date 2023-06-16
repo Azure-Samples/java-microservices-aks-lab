@@ -11,7 +11,7 @@ has_children: true
 
 ## Lab scenario
 
-You have created your first Azure Kubernetes Service, deployed your applications to it and exposed them through the api-gateway service. Now that everything is up and running, it would be nice to monitor the availability of your applications and to be able to see in case any errors or exceptions in your applications occur. In this lab you will add end-to-end monitoring to your applications. 
+You have created your first Azure Kubernetes Service, deployed your applications to it and exposed them through the api-gateway service. Now that everything is up and running, it would be nice to monitor the availability of your applications and to be able to see in case any errors or exceptions in your applications occur. In this lab you will add end-to-end monitoring to your applications.
 
 ## Objectives
 
@@ -43,4 +43,3 @@ In this lab, you will:
 
 {: .note }
 > The instructions provided in this exercise assume that you successfully completed the previous exercise and are using the same lab environment, including your Git Bash session with the relevant environment variables already set.
-

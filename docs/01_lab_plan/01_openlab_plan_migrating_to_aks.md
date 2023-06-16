@@ -38,4 +38,3 @@ During this lab, you will:
 - Consider tools for connecting to and managing your Azure environment
 
 This first lab will be mainly a conceptual exercise that does not involve deploying any of the application components to Azure. You will run the initial deployment in the next exercise.
-

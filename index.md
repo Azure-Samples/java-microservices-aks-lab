@@ -6,6 +6,9 @@ nav_order: 1
 
 # Lab: Deploying and running Java Applications in Azure Kubernetes
 
+   {: .important }
+   > We are currently in the process of making some important updates in this lab. These include an upgrade to Spring Boot 3 and Java 17, as well as adding passwordless connections to Azure services. These are quite major changes and at this point the full run through of all the lab steps has **not** been tested yet in this new version. Be patient though, we plan to finish testing for this new version by the end of this week. Make sure that after this week you start your lab run through fresh, with a clean copy of the code. In case you already want to test out this new version this week as well, we appreciated all feedback in the issue list.
+
 This lab teaches you how to deploy the [Spring Petclinic Microservices](https://github.com/Azure-Samples/java-microservices-aks-lab/tree/main/src) application to an AKS cluster and integrate it with additional Azure services.
 
 ## Modules
@@ -29,16 +32,17 @@ The lab is available as GitHub pages [here](https://azure-samples.github.io/java
 
 For running this lab you will need:
 
-- A GitHub account
-- An Azure Subscription
+* A GitHub account
+* An Azure Subscription
 
 ### Installation
 
-For running this lab with all the needed tooling, there are 3 options available: 
+For running this lab with all the needed tooling, there are 3 options available:
 
-- Using a GitHub codespace  
-- Using Visual Studio Code with remote containers option
-- Install all the tools on your local machine
+* Using a GitHub codespace  
+* Using Visual Studio Code with remote containers option
+* Install all the tools on your local machine
+
+All the steps of this lab have been tested in the GitHub CodeSpace. This is the preferred option for running this lab!
 
 Full installation guidance and options for running this lab can be found in the [Installation]({% link install.md %}) instructions.
-

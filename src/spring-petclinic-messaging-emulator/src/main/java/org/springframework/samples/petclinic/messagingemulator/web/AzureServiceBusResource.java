@@ -2,7 +2,7 @@ package org.springframework.samples.petclinic.messagingemulator.web;
 
 import java.util.List;
 
-import javax.jms.JMSException;
+import jakarta.jms.JMSException;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.samples.petclinic.messagingemulator.entity.PetClinicMessageRequest;
