@@ -110,7 +110,7 @@ To get started, follow the following steps:
 {: .note }
 > If needed, reinstall Git and, during installation, ensure that the Git Credential Manager is enabled.
 
-- [Apache Maven 3.8.5](apache-maven-3.8.5-bin.zip) available from [Apache Maven Project downloads](https://maven.apache.org/download.cgi)
+- Apache Maven 3.8.5 available from [Apache Maven Project downloads](https://maven.apache.org/download.cgi)
 
 {: .note }
 > To install Apache Maven, extract the content of the .zip file by running `unzip apache-maven-3.8.5-bin.zip`. Next, add the path to the bin directory of the extracted content to the `PATH` environment variable. Assuming that you extracted the content directly into your home directory, you could accomplish this by running the following command from the Git Bash shell: `export PATH=~/apache-maven-3.8.5/bin:$PATH`.
