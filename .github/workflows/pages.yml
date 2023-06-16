@@ -8,7 +8,7 @@ name: Deploy Jekyll site to Pages
 
 on:
   push:
-    branches: ["3.0updates"]
+    branches: ["main"]
     paths-ignore: 'src/**'
 
   # Allows you to run this workflow manually from the Actions tab
