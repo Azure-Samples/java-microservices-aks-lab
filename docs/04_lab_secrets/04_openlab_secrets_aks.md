@@ -18,10 +18,11 @@ Your team is now running a first version of the spring-petclinic microservice ap
 After you complete this lab, you will be able to:
 
 - Create an Azure Key Vault service
-- Add your connection string and GitHub PAT as a secret in Key Vault
+- Add your GitHub PAT as a secret in Key Vault
+- Enable Workload Identity on your AKS cluster
 - Add Key Vault CSI driver to your cluster
-- Allow your kubelet identity access to your Key Vault
 - Create a secret provider class to serve secrets from Key Vault to your application
+- Connect to the database without using username and password
 
 The below image illustrates the end state you will be building in this lab.
 
