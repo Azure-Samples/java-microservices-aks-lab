@@ -21,7 +21,6 @@ After you complete this lab, you will be able to:
 - Configure AKS monitoring
 - Configure Application Insights to receive monitoring information from your applications
 - Analyze application specific monitoring data
-- Analyze logs
 
 The below image illustrates the end state you will be building in this lab.
 
