@@ -1,5 +1,5 @@
 {
-    "image": "mcr.microsoft.com/devcontainers/java:17",
+    "image": "mcr.microsoft.com/devcontainers/java:17-bullseye",
     "features": {
         "ghcr.io/devcontainers/features/java:1": {
             "version": "none",
