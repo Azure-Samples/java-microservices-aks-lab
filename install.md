@@ -20,7 +20,7 @@ For running this lab with all the needed tooling, there are 3 options available:
 [![Open in GitHub Codespaces](https://img.shields.io/badge/Github_Codespaces-Open-black?style=for-the-badge&logo=github
 )](https://codespaces.new/Azure-Samples/java-microservices-aks-lab)
 
-The [git repository of this lab](https://github.com/Azure-Samples/java-microservices-aks-lab) contains a dev container for Java development. This container contains all the needed tools for running this lab. In case you want to use this dev container you can use a [GitHub CodeSpace](https://github.com/features/codespaces) in case your GitHub account is enabled for Codespaces.
+The [git repository of this lab](https://github.com/Azure-Samples/java-microservices-aks-lab) contains a dev container for Java development. This container contains all the needed tools for running this lab. In case you want to use this dev container you can use a [GitHub CodeSpace](https://github.com/features/codespaces) in case your GitHub account is enabled for Codespaces. The button above will create a new codespace for you to use. Or you can use the manual steps described below.
 
 1. Navigate to the [GitHub repository of this lab](https://github.com/Azure-Samples/java-microservices-aks-lab) and select **Fork**.
 
@@ -41,6 +41,9 @@ The [git repository of this lab](https://github.com/Azure-Samples/java-microserv
 
 ## Using Visual Studio Code with remote containers
 
+[![Open in Remote - Dev Containers](https://img.shields.io/badge/Dev_Containers-Open-blue?style=for-the-badge&logo=visualstudiocode
+)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/Azure-Samples/java-microservices-aks-lab)
+
 The [git repository of this lab](https://github.com/Azure-Samples/java-microservices-aks-lab) contains a dev container for Java development. This container contains all the needed tools for running this lab. For this option you need the following tools to be installed on your local system:
 
 - Visual Studio Code available from [Visual Studio Code Downloads](https://code.visualstudio.com/download)
@@ -56,7 +59,7 @@ git config --global user.email "<your-email-address>"
 git config --global user.name "<your-full-name>"
 ```
 
-To get started, follow the following steps: 
+To get started, either use the above button, which will open up this repository in a remote container, or follow the below step by step instructions: 
 
 1. Navigate to the [GitHub repository of this lab](https://github.com/Azure-Samples/java-microservices-aks-lab) and select **Fork**.
 
