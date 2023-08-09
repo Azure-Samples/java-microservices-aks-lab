@@ -17,6 +17,9 @@ For running this lab with all the needed tooling, there are 3 options available:
 
 ## Using a GitHub Codespace
 
+[![Open in GitHub Codespaces](https://img.shields.io/badge/Github_Codespaces-Open-black?style=for-the-badge&logo=github
+)](https://codespaces.new/Azure-Samples/java-microservices-aks-lab)
+
 The [git repository of this lab](https://github.com/Azure-Samples/java-microservices-aks-lab) contains a dev container for Java development. This container contains all the needed tools for running this lab. In case you want to use this dev container you can use a [GitHub CodeSpace](https://github.com/features/codespaces) in case your GitHub account is enabled for Codespaces.
 
 1. Navigate to the [GitHub repository of this lab](https://github.com/Azure-Samples/java-microservices-aks-lab) and select **Fork**.
