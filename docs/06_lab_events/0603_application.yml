@@ -39,6 +39,11 @@ spring:
       poller:
         initial-delay: 0
         fixed-delay: 1000    
+    config:
+      # Allow the microservices to override the remote properties with their own System properties or config file
+      allow-override: true
+      # Override configuration with any local property source
+      override-none: true
   datasource:
     url: jdbc:mysql://<your-mysql-server-name>.mysql.database.azure.com:3306/petclinic?useSSL=true&serverTimezone=UTC
     username: mysql_conn
@@ -56,12 +61,6 @@ spring:
   sleuth:
     sampler:
       probability: 1.0
-  cloud:
-    config:
-      # Allow the microservices to override the remote properties with their own System properties or config file
-      allow-override: true
-      # Override configuration with any local property source
-      override-none: true
   jpa:
     open-in-view: false
     hibernate:
