@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-server
+data:
+  # property-like keys; each key maps to a simple value
+  CONFIG_SERVER_URL: "http://config-server:8888"
+  APPLICATIONINSIGHTS_CONNECTION_STRING: "InstrumentationKey=434827df-8ba5-4c35-8728-f96694ab6de2;IngestionEndpoint=https://eastus-8.in.applicationinsights.azure.com/;LiveEndpoint=https://eastus.livediagnostics.monitor.azure.com/"

@@ -1,20 +1,5 @@
-/*
- * Copyright 2002-2021 the original author or authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package org.springframework.samples.petclinic.customers.web;
-
+   
 import io.micrometer.core.annotation.Timed;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,12 +7,23 @@ import org.springframework.http.HttpStatus;
 import org.springframework.samples.petclinic.customers.model.Owner;
 import org.springframework.samples.petclinic.customers.model.OwnerRepository;
 import org.springframework.web.bind.annotation.*;
-
+   
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import java.util.List;
 import java.util.Optional;
-
+   
+import reactor.core.publisher.Sinks;
+import reactor.core.publisher.Flux;
+import org.springframework.messaging.Message;
+import org.springframework.messaging.support.MessageBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Bean;
+import java.util.function.Supplier;
+   
+import org.springframework.beans.factory.annotation.Autowired;
+   
 /**
  * @author Juergen Hoeller
  * @author Ken Krebs
@@ -41,18 +37,29 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Slf4j
 class OwnerResource {
-
+   
     private final OwnerRepository ownerRepository;
-
+   
+    @Autowired
+    private Sinks.Many<Message<String>> many;
+   
+    private static final Logger LOGGER = LoggerFactory.getLogger(OwnerResource.class);
+   
     /**
      * Create Owner
      */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Owner createOwner(@Valid @RequestBody Owner owner) {
+        LOGGER.info("+++Sending events+++");
+        many.emitNext(MessageBuilder.withPayload("New owner created: " + owner.getFirstName() + " " + owner.getLastName() + " with many pets ...").build(), Sinks.   EmitFailureHandler.FAIL_FAST);
+        for(int i = 0; i < 100; i++) {
+            many.emitNext(MessageBuilder.withPayload("Pet " + i).build(), Sinks.EmitFailureHandler.FAIL_FAST);
+        }
+   
         return ownerRepository.save(owner);
     }
-
+   
     /**
      * Read single Owner
      */
@@ -60,7 +67,7 @@ class OwnerResource {
     public Optional<Owner> findOwner(@PathVariable("ownerId") @Min(1) int ownerId) {
         return ownerRepository.findById(ownerId);
     }
-
+   
     /**
      * Read List of Owners
      */
@@ -68,7 +75,7 @@ class OwnerResource {
     public List<Owner> findAll() {
         return ownerRepository.findAll();
     }
-
+   
     /**
      * Update Owner
      */
@@ -77,7 +84,7 @@ class OwnerResource {
     public void updateOwner(@PathVariable("ownerId") @Min(1) int ownerId, @Valid @RequestBody Owner ownerRequest) {
         final Optional<Owner> owner = ownerRepository.findById(ownerId);
         final Owner ownerModel = owner.orElseThrow(() -> new ResourceNotFoundException("Owner "+ownerId+" not found"));
-
+   
         // This is done by hand for simplicity purpose. In a real life use-case we should consider using MapStruct.
         ownerModel.setFirstName(ownerRequest.getFirstName());
         ownerModel.setLastName(ownerRequest.getLastName());
