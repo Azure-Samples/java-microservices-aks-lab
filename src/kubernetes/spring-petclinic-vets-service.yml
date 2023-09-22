@@ -15,7 +15,7 @@ spec:
         app: vets-service
     spec:
       containers:
-      - image: acrpetclinicee7b68.azurecr.io/spring-petclinic-vets-service:
+      - image: acrpetclinicee7b68.azurecr.io/spring-petclinic-vets-service:3.0.2
         name: vets-service
         env:
         - name: "CONFIG_SERVER_URL"
@@ -23,6 +23,18 @@ spec:
             configMapKeyRef:
               name: config-server
               key: CONFIG_SERVER_URL
+        - name: "APPLICATIONINSIGHTS_CONNECTION_STRING"
+          valueFrom:
+            configMapKeyRef:
+              name: config-server
+              key: APPLICATIONINSIGHTS_CONNECTION_STRING
+        - name: "APPLICATIONINSIGHTS_CONFIGURATION_CONTENT"
+          value: >-
+            {
+                "role": {   
+                    "name": "vets-service"
+                  }
+            }
         imagePullPolicy: Always
         livenessProbe:
           failureThreshold: 3

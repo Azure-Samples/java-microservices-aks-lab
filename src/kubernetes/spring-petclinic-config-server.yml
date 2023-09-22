@@ -15,7 +15,7 @@ spec:
         app: config-server
     spec:
       containers:
-      - image: acrpetclinicee7b68.azurecr.io/spring-petclinic-config-server:
+      - image: acrpetclinicee7b68.azurecr.io/spring-petclinic-config-server:3.0.2
         name: config-server
         env:
         - name: "CONFIG_SERVER_URL"
@@ -23,6 +23,18 @@ spec:
             configMapKeyRef:
               name: config-server
               key: CONFIG_SERVER_URL
+        - name: "APPLICATIONINSIGHTS_CONNECTION_STRING"
+          valueFrom:
+            configMapKeyRef:
+              name: config-server
+              key: APPLICATIONINSIGHTS_CONNECTION_STRING
+        - name: "APPLICATIONINSIGHTS_CONFIGURATION_CONTENT"
+          value: >-
+            {
+                "role": {   
+                    "name": "config-server"
+                  }
+            }
         imagePullPolicy: Always
         livenessProbe:
           failureThreshold: 3
