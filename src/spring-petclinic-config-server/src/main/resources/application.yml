@@ -6,6 +6,7 @@ spring:
         git:
           uri: https://github.com/weshockley/spring-petclinic-microservices-config
           username: weshockley
+
           password: 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
           default-label: main
         # Use the File System Backend to avoid git pulling. Enable "native" profile in the Config Server.
